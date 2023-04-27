@@ -1,4 +1,24 @@
-USE laptopecommcerce;
+CREATE DATABASE IF NOT EXISTS laptopecommerce;
+
+USE laptopecommerce;
+
+CREATE TABLE users (
+  user_id INT NOT NULL AUTO_INCREMENT,
+  password VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  phone INT NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  country VARCHAR(255) NOT NULL,
+  role_id INT NOT NULL,
+  PRIMARY KEY (user_id)
+);
+
+CREATE TABLE permission (
+  role_id INT NOT NULL,
+  permission INT NOT NULL,
+  PRIMARY KEY (role_id)
+);
 
 CREATE TABLE orders (
   order_id INT NOT NULL AUTO_INCREMENT,
@@ -10,9 +30,7 @@ CREATE TABLE orders (
   order_date DATETIME NOT NULL,
   order_status VARCHAR(255) NOT NULL,
   discount DECIMAL(8,2) NOT NULL,
-  PRIMARY KEY (order_id),
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (shipment_id) REFERENCES shipments(shipment_id)
+  PRIMARY KEY (order_id)
 );
 
 CREATE TABLE shipments (
@@ -21,7 +39,6 @@ CREATE TABLE shipments (
   shipment_date DATETIME NOT NULL,
   shipment_status VARCHAR(255) NOT NULL,
   PRIMARY KEY (shipment_id)
-  FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
 
 CREATE TABLE order_details (
@@ -30,28 +47,7 @@ CREATE TABLE order_details (
   product_id INT NOT NULL,
   price DECIMAL(8,2) NOT NULL,
   quantity INT DEFAULT 1,
-  PRIMARY KEY (idx),
-  FOREIGN KEY (order_id) REFERENCES orders(order_id),
-  FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
-CREATE TABLE users (
-  user_id INT NOT NULL AUTO_INCREMENT,
-  password VARCHAR(255) NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  phone INT NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  address VARCHAR(255) NOT NULL,
-  country VARCHAR(255) NOT NULL,
-  role_id INT NOT NULL,
-  PRIMARY KEY (user_id),
-  FOREIGN KEY (role_id) REFERENCES permission(role_id)
-);
-
-CREATE TABLE permission (
-  role_id INT NOT NULL,
-  permission INT NOT NULL,
-  PRIMARY KEY (role_id)
+  PRIMARY KEY (idx)
 );
 
 CREATE TABLE products (
@@ -72,5 +68,3 @@ CREATE TABLE product_options (
   PRIMARY KEY (option_id),
   FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
-
-

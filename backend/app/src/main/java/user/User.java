@@ -21,7 +21,7 @@ public class User implements Serializable {
     private String name;
 
     @Column(name = "phone")
-    private int phone;
+    private String phone;
 
     @Column(name = "email")
     private String email;
@@ -36,70 +36,66 @@ public class User implements Serializable {
     private int roleId;
 
     public User() {    }
-    public User(String password, String name, int phone, String email, String address, String country, int roleId) {
+    public User(String name, String password, String phone, String email, String address, String country) {
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
-        this.roleId = roleId;
     }
 
     public Integer getUserId() {
-        return userId;
+        return this.userId;
     }
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
     public void setPassword(String password) {
         this.password = password;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getPhone() {
-        return phone;
+    public String getPhone() {
+        return this.phone;
     }
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
     public void setEmail(String email) {
         this.email = email;
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
     public void setAddress(String address) {
         this.address = address;
     }
 
     public String getCountry() {
-        return country;
+        return this.country;
     }
     public void setCountry(String country) {
         this.country = country;
     }
 
     public int getRoleId() {
-        return roleId;
-    }
-    public void setRoleId(int roleId) {
-        this.roleId = (roleId >= 0 && roleId <= 1) ? roleId : 1;
+        return this.roleId;
     }
 
     @Override

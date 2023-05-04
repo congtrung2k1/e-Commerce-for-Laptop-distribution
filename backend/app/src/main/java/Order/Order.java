@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "orders")
 
-public class Orders implements Serializable {
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -41,8 +41,8 @@ public class Orders implements Serializable {
     @Column(name = "discount")
     private BigDecimal discount;
 
-    public Orders() {}
-    public Orders(int userId, int shipmentId, BigDecimal amount, String description, String shippingAddr, Date orderDate, String orderStatus, BigDecimal discount) {
+    public Order() {}
+    public Order(int userId, int shipmentId, BigDecimal amount, String description, String shippingAddr, Date orderDate, String orderStatus, BigDecimal discount) {
         this.userId = userId;
         this.shipmentId = shipmentId;
         this.amount = amount;
@@ -125,10 +125,10 @@ public class Orders implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Orders)) {
+        if (!(object instanceof Order)) {
             return false;
         }
-        Orders other = (Orders) object;
+        Order other = (Order) object;
         return !((this.orderId == null && other.orderId != null) || (this.orderId != null && !this.orderId.equals(other.orderId)));
     }
 

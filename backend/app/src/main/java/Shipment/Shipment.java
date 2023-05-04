@@ -16,7 +16,7 @@ public class Shipment implements Serializable {
     private Integer shipmentId;
     
     @Column(name = "order_id")
-    private int orderId;
+    private Integer orderId;
     
     @Column(name = "shipment_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -26,35 +26,31 @@ public class Shipment implements Serializable {
     private String shipmentStatus;
 
     public Shipment() {}
-    public Shipment(int orderId, Date shipmentDate, String shipmentStatus) {
+    public Shipment(Integer orderId, String shipmentStatus) {
         this.orderId = orderId;
-        this.shipmentDate = shipmentDate;
         this.shipmentStatus = shipmentStatus;
     }
 
     public Integer getShipmentId() {
-        return shipmentId;
+        return this.shipmentId;
     }
     public void setShipmentId(Integer shipmentId) {
         this.shipmentId = shipmentId;
     }
 
     public int getOrderId() {
-        return orderId;
+        return this.orderId;
     }
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
     public Date getShipmentDate() {
-        return shipmentDate;
-    }
-    public void setShipmentDate(Date shipmentDate) {
-        this.shipmentDate = shipmentDate;
+        return this.shipmentDate;
     }
 
     public String getShipmentStatus() {
-        return shipmentStatus;
+        return this.shipmentStatus;
     }
     public void setShipmentStatus(String shipmentStatus) {
         this.shipmentStatus = shipmentStatus;

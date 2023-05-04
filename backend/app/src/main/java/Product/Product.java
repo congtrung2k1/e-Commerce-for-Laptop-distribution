@@ -46,49 +46,49 @@ public class Product implements Serializable {
     }
 
     public Integer getProductId() {
-        return productId;
+        return this.productId;
     }
     public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
     public void setName(String name) {
         this.name = name;
     }
 
     public BigDecimal getPrice() {
-        return price;
+        return this.price;
     }
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
     public void setDescription(String description) {
         this.description = description;
     }
 
     public String getImage() {
-        return image;
+        return this.image;
     }
     public void setImage(String image) {
         this.image = image;
     }
 
     public Date getCreateDate() {
-        return createDate;
+        return this.createDate;
     }
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
     public String getCategory() {
-        return category;
+        return this.category;
     }
     public void setCategory(String category) {
         this.category = category;

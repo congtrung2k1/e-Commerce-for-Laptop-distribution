@@ -1,7 +1,6 @@
-package Product;
+package backend.Product;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -20,7 +19,7 @@ public class Product implements Serializable {
     private String name;
 
     @Column(name = "price")
-    private BigDecimal price;
+    private double price;
 
     @Column(name = "description")
     private String description;
@@ -36,7 +35,7 @@ public class Product implements Serializable {
     private String category;
 
     public Product() {    }
-    public Product(String name, BigDecimal price, String description, String image, Date createDate, String category) {
+    public Product(String name, double price, String description, String image, Date createDate, String category) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -59,10 +58,10 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return this.price;
     }
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

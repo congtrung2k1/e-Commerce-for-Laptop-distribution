@@ -1,6 +1,4 @@
-package user;
-
-import Order.Order;
+package backend.user;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,5 +58,14 @@ public class UserService {
     
     public List<String> getUserOrder(Integer user_id){
         return userRepository.getUserOrder(user_id);
+    }
+
+    public String getAddrByUserId(Integer user_id) throws Exception {
+        Optional<User> tmpUser = userRepository.findById(user_id);
+        if (tmpUser.isPresent()) {
+            return tmpUser.get().getAddress();
+        } else {
+            throw new Exception("User with id: " + user_id + " not found");
+        }
     }
 }

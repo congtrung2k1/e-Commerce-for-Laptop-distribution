@@ -1,4 +1,4 @@
-package Product;
+package backend.Product;
 
 import java.util.List;
 
@@ -27,4 +27,11 @@ public class ProductController {
         }
         return null;
     }
+    
+// Get product by product_id
+    @GetMapping("/product/category/{category}")
+    public List<Product> getProductByCategory(@PathVariable("name") String category) throws Exception {
+        List<Product> productList = productService.getProductByCategory(category);
+        return productList;
+    } 
 }

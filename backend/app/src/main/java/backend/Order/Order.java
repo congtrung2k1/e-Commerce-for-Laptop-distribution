@@ -1,7 +1,6 @@
-package Order;
+package backend.Order;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -23,7 +22,7 @@ public class Order implements Serializable {
     private int shipmentId;
 
     @Column(name = "amount")
-    private BigDecimal amount;
+    private double amount;
 
     @Column(name = "description")
     private String description;
@@ -39,80 +38,76 @@ public class Order implements Serializable {
     private String orderStatus;
 
     @Column(name = "discount")
-    private BigDecimal discount;
+    private double discount;
 
     public Order() {}
-    public Order(int userId, int shipmentId, BigDecimal amount, String description, String shippingAddr, Date orderDate, String orderStatus, BigDecimal discount) {
+    public Order(int userId, int shipmentId, double amount, String description, String shippingAddr, String orderStatus, double discount) {
         this.userId = userId;
         this.shipmentId = shipmentId;
         this.amount = amount;
         this.description = description;
         this.shippingAddr = shippingAddr;
-        this.orderDate = orderDate;
         this.orderStatus = orderStatus;
         this.discount = discount;
     }
 
     public Integer getOrderId() {
-        return orderId;
+        return this.orderId;
     }
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
     public int getUserId() {
-        return userId;
+        return this.userId;
     }
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
     public int getShipmentId() {
-        return shipmentId;
+        return this.shipmentId;
     }
     public void setShipmentId(int shipmentId) {
         this.shipmentId = shipmentId;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public double getAmount() {
+        return this.amount;
     }
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
     public void setDescription(String description) {
         this.description = description;
     }
 
     public String getShippingAddr() {
-        return shippingAddr;
+        return this.shippingAddr;
     }
     public void setShippingAddr(String shippingAddr) {
         this.shippingAddr = shippingAddr;
     }
 
     public Date getOrderDate() {
-        return orderDate;
-    }
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+        return this.orderDate;
     }
 
     public String getOrderStatus() {
-        return orderStatus;
+        return this.orderStatus;
     }
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public BigDecimal getDiscount() {
-        return discount;
+    public double getDiscount() {
+        return this.discount;
     }
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 

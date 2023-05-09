@@ -1,4 +1,4 @@
-package user;
+package backend.user;
  
 import java.util.List;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface UserRepository extends CrudRepository<User, Integer> {
-    @Query(value = "SELECT * FROM users", nativeQuery = true)
+    @Query(value = "SELECT users.user_id FROM users", nativeQuery = true)
     List<String> getUser();
 
     @Query(value = "SELECT orders.order_id FROM orders WHERE orders.user_id = ?1", nativeQuery = true)

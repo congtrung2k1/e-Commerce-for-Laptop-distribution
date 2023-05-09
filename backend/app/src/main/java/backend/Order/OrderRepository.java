@@ -1,4 +1,4 @@
-package Order;
+package backend.Order;
  
 import java.util.List;
 import org.springframework.data.jpa.repository.Modifying;

@@ -35,12 +35,12 @@ CREATE TABLE orders (
   order_id INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
   shipment_id INT NOT NULL,
-  amount DECIMAL(8,2) NOT NULL,
+  amount DOUBLE(8,2) NOT NULL,
   description VARCHAR(255) NOT NULL,
   shipping_addr VARCHAR(255) NOT NULL,
   order_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   order_status VARCHAR(255) DEFAULT "NAN",
-  discount DECIMAL(8,2) NOT NULL,
+  discount DOUBLE(8,2) NOT NULL,
   PRIMARY KEY (order_id)
 );
 
@@ -56,7 +56,7 @@ CREATE TABLE order_details (
   idx INT NOT NULL AUTO_INCREMENT,
   order_id INT NOT NULL,
   product_id INT NOT NULL,
-  price DECIMAL(8,2) NOT NULL,
+  price DOUBLE(8,2) NOT NULL,
   quantity INT DEFAULT 1,
   PRIMARY KEY (idx)
 );
@@ -64,7 +64,7 @@ CREATE TABLE order_details (
 CREATE TABLE products (
   product_id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
-  price DECIMAL(8,2) NOT NULL,
+  price DOUBLE(8,2) NOT NULL,
   description VARCHAR(255) NOT NULL,
   image VARCHAR(255) NOT NULL,
   create_date DATE NOT NULL,

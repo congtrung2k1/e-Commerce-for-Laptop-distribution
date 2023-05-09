@@ -1,4 +1,4 @@
-package Order;
+package backend.Order;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,12 +6,34 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import backend.user.UserService;
 
 @RestController
 @RequestMapping(path = "/order")
 public class OrderController {
     @Autowired
     private OrderService orderService;
+    
+    @Autowired
+    private UserService userService;
+    
+    @PostMapping("/order/create/{userId}")
+    public Order createOrder(@PathVariable("userId") String userId) throws Exception {
+        Integer user_id = Integer.valueOf(userId);
+        Integer shipmentId = 0;
+        double amount = 0.0;
+        String description = "None";
+        String shippingAddr = userService.getAddrByUserId(user_id);
+        String orderStatus = "Pending";
+        double discount = 0.0;
+        try {
+            Order order = new Order(user_id, shipmentId, amount, description, shippingAddr, orderStatus, discount);
+            orderService.save(order);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
 // Get order by order_id
     @GetMapping("/order/{orderId}")

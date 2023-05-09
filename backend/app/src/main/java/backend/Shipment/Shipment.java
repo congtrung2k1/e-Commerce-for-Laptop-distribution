@@ -1,4 +1,4 @@
-package Shipment;
+package backend.Shipment;
 
 import java.io.Serializable;
 import java.util.Date;

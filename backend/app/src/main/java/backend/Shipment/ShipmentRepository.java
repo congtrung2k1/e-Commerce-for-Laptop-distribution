@@ -1,4 +1,4 @@
-package Shipment;
+package backend.Shipment;
  
 import java.util.List;
 import org.springframework.data.jpa.repository.Modifying;

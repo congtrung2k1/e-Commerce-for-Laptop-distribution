@@ -1,4 +1,4 @@
-package Shipment;
+package backend.Shipment;
 
 import java.util.List;
 import java.util.Optional;

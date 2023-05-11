@@ -14,7 +14,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/signup")
-    public Integer signUp(@RequestBody HashMap<String, String> user_form) {
+    public String signUp(@RequestBody HashMap<String, String> user_form) {
         String password = user_form.get("password");
         String name = user_form.get("name");
         String phone = user_form.get("phone");
@@ -28,12 +28,12 @@ public class UserController {
             List<User> userList = userService.getAllUser();
             for (User tmp: userList){
                 if (tmp.getPhone().equals(phone))
-                    return tmp.getUserId();
+                    return String.valueOf(tmp.getUserId());
             }
-            return 0;
+            return "0";
         } catch (Exception e) {
             e.printStackTrace();
-            return -1;
+            return "-1";
         }
     }
 
@@ -45,7 +45,7 @@ public class UserController {
         List<User> userList = userService.getAllUser();
         for (User user: userList) {
             if ( user.getPhone().equals(phone) && user.getPassword().equals(password)) {
-                    return user;
+                return user;
             }
         }
         return null;
@@ -93,7 +93,6 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return "{}";
     }
 

@@ -23,12 +23,12 @@ public class Shipment implements Serializable {
     private Date shipmentDate;
 
     @Column(name = "shipment_status")
-    private String shipmentStatus;
+    private String shipmentStatus = "pending";
 
     public Shipment() {}
-    public Shipment(Integer orderId, String shipmentStatus) {
+    public Shipment(Integer orderId) {
         this.orderId = orderId;
-        this.shipmentStatus = shipmentStatus;
+        this.shipmentStatus = "pending";
     }
 
     public Integer getShipmentId() {

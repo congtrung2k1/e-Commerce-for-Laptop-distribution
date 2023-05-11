@@ -18,6 +18,16 @@ public class ProductService {
         List<Product> allProduct = (List<Product>) productRepository.findAll();
         return allProduct;
     }
+    
+    public Product getProductByProductId(Integer product_id) throws Exception {
+        Optional<Product> tmpProduct = productRepository.findById(product_id);
+        if (tmpProduct.isPresent()) {
+            return tmpProduct.get();
+        }
+        else {
+            throw new Exception("Product with id: " + product_id + " not found");
+        }
+    }
 
     public List<Product> getProductByCategory(String category) throws Exception {
         List<String> listProductId = (List<String>) productRepository.getProductIdByCategory(category);

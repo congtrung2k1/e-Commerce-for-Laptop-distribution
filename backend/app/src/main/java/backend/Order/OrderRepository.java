@@ -13,8 +13,11 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
     List<Order> getOrder(Integer order_id);
 
     @Modifying
-    @Query(value = "UPDATE orders SET ordername = ?2, password = ?3, phone = ?4, email = ?5, address = ?6, country = ?7 WHERE order_id = ?1", nativeQuery = true)
-    void updateOrder(Integer order_id, String name, String password, String phone, String email, String address, String country);
+    @Query(value = "UPDATE orders SET amount = ?2, description = ?3, shippingAddr = ?4, order_status = ?5, discount = ?6 WHERE order_id = ?1", nativeQuery = true)
+    void updateOrder(Integer order_id, double amount, String description, String shippingAddr, String orderStatus, double discount);
+    
+    @Query(value = "UPDATE orders SET order_status = ?2 WHERE order_id = ?1", nativeQuery = true)
+    void updateOrder(Integer order_id, String order_status);
     
     Order findOrderByOrderId(Integer order_id);
 }

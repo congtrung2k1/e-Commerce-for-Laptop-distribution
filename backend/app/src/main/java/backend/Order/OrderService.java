@@ -20,7 +20,7 @@ public class OrderService {
         return allOrder;
     }
     
-    public Order getOrder(int order_id) throws Exception {
+    public Order getOrderByOrderId(int order_id) throws Exception {
         Optional<Order> tmpOrder = orderRepository.findById(order_id);
         if (tmpOrder.isPresent()) {
             return tmpOrder.get();
@@ -51,8 +51,13 @@ public class OrderService {
         }
     }
     
-    public Order updateOrder(Integer order_id, String name, String password, String phone, String email, String address, String country) throws Exception {
-        orderRepository.updateOrder(order_id, name, password, phone, email, address, country);
-        return getOrder(order_id);
+    public Order updateOrder(Integer order_id, double amount, String description, String shippingAddr, String orderStatus, double discount) throws Exception {
+        orderRepository.updateOrder(order_id, amount, description, shippingAddr, orderStatus, discount);
+        return getOrderByOrderId(order_id);
+    }
+
+    public Order updateOrder(Integer order_id, String order_status) throws Exception {
+        orderRepository.updateOrder(order_id, order_status);
+        return getOrderByOrderId(order_id);
     }
 }

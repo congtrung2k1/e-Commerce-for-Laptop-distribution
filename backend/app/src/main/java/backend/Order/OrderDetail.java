@@ -1,13 +1,12 @@
-package Order;
+package backend.Order;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "order_details")
 
-public class OrderDetails implements Serializable {
+public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -22,13 +21,13 @@ public class OrderDetails implements Serializable {
     private int productId;
 
     @Column(name = "price")
-    private BigDecimal price;
+    private double price;
     
     @Column(name = "quantity")
     private Integer quantity;
 
-    public OrderDetails() {}
-    public OrderDetails(int orderId, int productId, BigDecimal price, Integer quantity) {
+    public OrderDetail() {}
+    public OrderDetail(int orderId, int productId, double price, Integer quantity) {
         this.orderId = orderId;
         this.productId = productId;
         this.price = price;
@@ -56,10 +55,10 @@ public class OrderDetails implements Serializable {
         this.productId = productId;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -79,10 +78,10 @@ public class OrderDetails implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof OrderDetails)) {
+        if (!(object instanceof OrderDetail)) {
             return false;
         }
-        OrderDetails other = (OrderDetails) object;
+        OrderDetail other = (OrderDetail) object;
         return !((this.idx == null && other.idx != null) || (this.idx != null && !this.idx.equals(other.idx)));
     }
 

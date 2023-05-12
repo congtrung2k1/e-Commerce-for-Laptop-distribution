@@ -17,9 +17,9 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (password, name, phone, email, address, country, role_id) 
-  VALUES ('admin', 'admin', '0123456', 'admin@laptop.com', 'NY', 'USA', 0);
+  VALUES ('admin', 'admin', '0987123456', 'admin@laptop.com', 'NY', 'USA', 0);
 INSERT INTO users (password, name, phone, email, address, country, role_id) 
-  VALUES ('123qwe', 'vu_dung', '03434353', 'vuvandung@gmail.com', 'HCMC', 'VN', 1);
+  VALUES ('123qwe', 'vu_dung', '0343435343', 'vuvandung@gmail.com', 'HCMC', 'VN', 1);
 
 
 CREATE TABLE permission (

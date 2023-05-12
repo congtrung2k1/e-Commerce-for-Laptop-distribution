@@ -33,9 +33,9 @@ public class User implements Serializable {
     private String country;
 
     @Column(name = "role_id")
-    private int roleId;
+    private int roleId = 1;
 
-    public User() {    }
+    public User() {}
     public User(String name, String password, String phone, String email, String address, String country) {
         this.password = password;
         this.name = name;
@@ -47,9 +47,6 @@ public class User implements Serializable {
 
     public Integer getUserId() {
         return this.userId;
-    }
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getPassword() {

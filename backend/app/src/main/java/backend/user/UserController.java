@@ -11,31 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/user")
 public class UserController {
     @Autowired
-    private UserService userService;
-
-    @PostMapping("/signup")
-    public String signUp(@RequestBody HashMap<String, String> user_form) {
-        String password = user_form.get("password");
-        String name = user_form.get("name");
-        String phone = user_form.get("phone");
-        String email = user_form.get("email");
-        String address = user_form.get("address");
-        String country = user_form.get("country");
-        System.out.println(phone);
-        try {
-            User user = new User(password, name, phone, email, address, country);
-            userService.save(user);
-            List<User> userList = userService.getAllUser();
-            for (User tmp: userList){
-                if (tmp.getPhone().equals(phone))
-                    return String.valueOf(tmp.getUserId());
-            }
-            return "0";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "-1";
-        }
-    }
+    private UserService userService; 
 
     @PostMapping("/signin")
     public User signIn(@RequestBody HashMap<String, String> data) {
@@ -50,7 +26,6 @@ public class UserController {
         }
         return null;
     }
-    
     
 // Get user by user_id
     @GetMapping("/user/{userId}")

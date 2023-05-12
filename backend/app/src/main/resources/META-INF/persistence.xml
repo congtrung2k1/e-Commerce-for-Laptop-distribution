@@ -9,6 +9,7 @@
     <class>user.Permission</class>
     <class>Shipment.Shipment</class>
     <class>Order.Order</class>
+    <class>backend.security.JWTUtility</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

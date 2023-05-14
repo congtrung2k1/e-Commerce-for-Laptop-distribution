@@ -2,10 +2,10 @@ CREATE DATABASE IF NOT EXISTS laptopecommerce;
 
 USE laptopecommerce;
 
-DROP TABLE IF EXISTS users, permission, orders, shipments, order_details, products; 
+DROP TABLE IF EXISTS customers, permission, orders, shipments, order_details, products; 
 
-CREATE TABLE users (
-  user_id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE customers (
+  customer_id INT NOT NULL AUTO_INCREMENT,
   password VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
   phone VARCHAR(20) NOT NULL,
@@ -13,13 +13,13 @@ CREATE TABLE users (
   address VARCHAR(255) NOT NULL,
   country VARCHAR(255) NOT NULL,
   role_id INT DEFAULT 1,
-  PRIMARY KEY (user_id)
+  PRIMARY KEY (customer_id)
 );
 
-INSERT INTO users (password, name, phone, email, address, country, role_id) 
-  VALUES ('admin', 'admin', '0123456', 'admin@laptop.com', 'NY', 'USA', 0);
-INSERT INTO users (password, name, phone, email, address, country, role_id) 
-  VALUES ('123qwe', 'vu_dung', '03434353', 'vuvandung@gmail.com', 'HCMC', 'VN', 1);
+INSERT INTO customers (password, name, phone, email, address, country, role_id) 
+  VALUES ('admin', 'admin', '0987123456', 'admin@laptop.com', 'NY', 'USA', 0);
+INSERT INTO customers (password, name, phone, email, address, country, role_id) 
+  VALUES ('123qwe', 'vu_dung', '0343435343', 'vuvandung@gmail.com', 'HCMC', 'VN', 1);
 
 
 CREATE TABLE permission (
@@ -33,7 +33,7 @@ INSERT INTO permission VALUES (1, "view_create");
 
 CREATE TABLE orders (
   order_id INT NOT NULL AUTO_INCREMENT,
-  user_id INT NOT NULL,
+  customer_id INT NOT NULL,
   shipment_id INT NOT NULL,
   amount DOUBLE(8,2) NOT NULL,
   description VARCHAR(255) NOT NULL,

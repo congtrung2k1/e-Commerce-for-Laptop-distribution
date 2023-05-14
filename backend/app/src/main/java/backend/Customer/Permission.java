@@ -1,4 +1,4 @@
-package user;
+package backend.Customer;
 
 import java.io.Serializable;
 import javax.persistence.*;

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import backend.user.UserService;
+import backend.Customer.CustomerService;
 import backend.Shipment.Shipment;
 import backend.Shipment.ShipmentService;
 
@@ -18,22 +18,22 @@ public class OrderController {
     private OrderService orderService;
     
     @Autowired
-    private UserService userService;
+    private CustomerService customerService;
     
     @Autowired
     private ShipmentService shipmentService;
     
-    @PostMapping("/order/create/{userId}")
-    public Order createOrder(@PathVariable("userId") String userId) throws Exception {
-        Integer user_id = Integer.valueOf(userId);
+    @PostMapping("/create/{customerId}")
+    public Order createOrder(@PathVariable("customerId") String customerId) throws Exception {
+        Integer customer_id = Integer.valueOf(customerId);
         Integer shipmentId = 0;
         double amount = 0.0;
         String description = "None";
-        String shippingAddr = userService.getAddrByUserId(user_id);
+        String shippingAddr = customerService.getAddrByCustomerId(customer_id);
         String orderStatus = "Pending";
         double discount = 0.0;
         try {
-            Order order = new Order(user_id, shipmentId, amount, description, shippingAddr, orderStatus, discount);
+            Order order = new Order(customer_id, shipmentId, amount, description, shippingAddr, orderStatus, discount);
             orderService.save(order);
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,20 +42,16 @@ public class OrderController {
     }
     
 // Get order by order_id
-    @GetMapping("/order/{orderId}")
-    public Order getOrder(@PathVariable("orderId") String orderId) throws Exception {
-        Integer order_id = Integer.valueOf(orderId);
-        List<Order> orderList = orderService.getAllOrder();
-        for (Order order: orderList) {
-            if (order.getOrderId() == order_id) {
-                return order;
-            }
-        }
-        return null;
+    @GetMapping("/edit/{orderId}")
+    public String getOrder(@PathVariable("orderId") String orderId) throws Exception {
+        Integer order_id = Integer.valueOf(orderId);        
+        Order order = orderService.getOrderByOrderId(order_id);
+        ObjectMapper jsonMapper = new ObjectMapper();
+        return jsonMapper.writeValueAsString(order);
     }
     
 // Get order by order_status
-    @GetMapping("/order/{order_status}")
+    @GetMapping("/{order_status}")
     public List<String> getOrderByStatus(@PathVariable("order_status") String order_status) throws Exception {
         List<String> result = null;
         List<Order> orderList = orderService.getAllOrder();
@@ -68,7 +64,7 @@ public class OrderController {
     }
     
 // Update Order
-    @PostMapping("/order/{orderId}/update")
+    @PostMapping("/edit/{orderId}/update")
     public String updateOrder(@RequestBody HashMap<String, String> order_form, @PathVariable("orderId") String orderId) {
         ObjectMapper jsonMapper = new ObjectMapper();
         
@@ -89,7 +85,7 @@ public class OrderController {
     }
     
 // Start shipping
-    @PostMapping("/order/{orderId}/approve")
+    @PostMapping("/approve/{orderId}")
     public String approveOrder(@RequestBody HashMap<String, String> order_form, @PathVariable("orderId") String orderId) throws Exception {        
         Integer order_id = Integer.valueOf(orderId);
         Shipment shipment = new Shipment(order_id);
@@ -106,7 +102,7 @@ public class OrderController {
     }
 
 // Reject order
-    @PostMapping("/order/{orderId}/reject")
+    @PostMapping("/reject/{orderId}")
     public String rejectOrder(@PathVariable("orderId") String orderId) throws Exception {
         ObjectMapper jsonMapper = new ObjectMapper();
 

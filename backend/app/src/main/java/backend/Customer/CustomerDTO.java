@@ -1,11 +1,11 @@
-package backend.user;
+package backend.Customer;
 
-public class UserDTO {
+public class CustomerDTO {
     public String phone;
     public String userId;
     public String token;
 
-    public UserDTO(String phone, String userId, String token) {
+    public CustomerDTO(String phone, String userId, String token) {
         this.phone = phone;
         this.userId = userId;
         this.token = token;

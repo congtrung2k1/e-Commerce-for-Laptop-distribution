@@ -1,7 +1,5 @@
 package backend.Security;
 
-import backend.user.*;
-
 import java.util.Arrays;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,18 +8,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import backend.Customer.CustomerRepository;
 
 @Service
-public class UserConnect implements UserDetailsService{
-    private backend.user.UserRepository userRepository;
+public class UserService implements UserDetailsService{
+    private backend.Customer.CustomerRepository customerReposiroty;
 
-    public UserConnect(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(CustomerRepository customerReposiroty) {
+        this.customerReposiroty = customerReposiroty;
     }
 
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-        backend.user.User tmpUser = userRepository.getUserByPhone(phone);
+        backend.Customer.Customer tmpUser = customerReposiroty.getCustomerByPhone(phone);
         if(tmpUser == null) {
             throw new UsernameNotFoundException("Phone not found");
         }

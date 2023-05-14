@@ -5,4 +5,4 @@ export const SessionContext = createContext({
     loginUrl: '',
     isAuthenticated: false,
     removeAuthCookies: () => {}
-})
+});

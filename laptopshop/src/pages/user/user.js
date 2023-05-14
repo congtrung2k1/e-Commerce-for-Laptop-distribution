@@ -19,9 +19,6 @@ export default function User() {
     const [password, setPassword] = useState();
     const [newPassword, setNewPassword] = useState();
     const [newPasswordConfirm, setNewPasswordConfirm] = useState();
-
-    const [disableUsernameEdit, setDisableUsernameEdit] = useState(true);
-    const [disablePasswordEdit, setDisablePasswordEdit] = useState(true);
     
     const getUser = async () => {
         axios.get(`http://localhost:8080/customer/edit/${userId}`).then((response) => {

@@ -24,12 +24,19 @@ function SignIn () {
 
         axios.post('http://localhost:8080/authenticate', form).then(response => {
             if(response.data.token) {
+                setUserId(response.data.userId);
                 setCookie("jwt", response.data.token);
                 setCookie("userId", response.data.userId);
                 setCookie("phone", response.data.phone);
-                navigate("/user", {replace: true});
+                navigate("/user", {isAuthenticated: true});
             }
-        }).catch(error => console.log(error.message));
+            else {
+                alert("Internal server error!");
+            }
+        }).catch(error => {
+            console.log(error.message);
+            alert("Login FAILED! Please check again!");
+        });
     };
 
     return (

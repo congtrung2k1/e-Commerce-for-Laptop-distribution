@@ -9,7 +9,7 @@ import Shipment from '../pages/shipment/shipment';
 import Edit from '../pages/edit/edit';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+// Using reactdom for control
 import PrivateRoute from './private-route';
 import Nav from '../components/Nav/nav';
 

@@ -1,18 +1,18 @@
-package backend.user;
+package backend.Customer;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users", catalog = "laptopecommerce", schema = "")
+@Table(name = "customers", catalog = "laptopecommerce", schema = "")
 
-public class User implements Serializable {
+public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer customerId;
     
     @Column(name = "password")
     private String password;
@@ -35,8 +35,8 @@ public class User implements Serializable {
     @Column(name = "role_id")
     private int roleId = 1;
 
-    public User() {}
-    public User(String name, String password, String phone, String email, String address, String country) {
+    public Customer() {}
+    public Customer(String name, String password, String phone, String email, String address, String country) {
         this.password = password;
         this.name = name;
         this.phone = phone;
@@ -45,8 +45,8 @@ public class User implements Serializable {
         this.country = country;
     }
 
-    public Integer getUserId() {
-        return this.userId;
+    public Integer getCustomerId() {
+        return this.customerId;
     }
 
     public String getPassword() {
@@ -96,24 +96,8 @@ public class User implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (this.userId != null ? this.userId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        return !((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId)));
-    }
-
-    @Override
     public String toString() {
-        return "user.Users[ userId=" + this.userId + " ]";
+        return "customer[ customerId=" + this.customerId + " ]";
     }
     
 }

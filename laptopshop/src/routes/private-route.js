@@ -15,9 +15,9 @@ const PrivateRoute = ({ Component }) => {
             return navigate({ path: "/" });
     }, [navigate, location, isAuthenticated]);
 
-    if (!isAuthenticated) {
-        return <Navigate to='/signin' state={{ from: location }} />;
-    };
+//    if (!isAuthenticated) {
+//        return <Navigate to='/signin' state={{ from: location }} />;
+//    };
     return <Component />;
 };
 

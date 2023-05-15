@@ -28,11 +28,14 @@ function SignUp () {
         event.preventDefault();
 
         axios.post('http://localhost:8080/signup', form).then(response => {
-            if (response.status === 200) {
+            if (response.data.errorMessage === undefined) {
+                alert("Successfully sign up");
                 navigate("/signin");
             }
+            else {
+                alert(response.data.errorMessage);
+            }
         }).catch((error) => console.log(error.message));
-
     };
 
     return (

@@ -5,7 +5,7 @@ import { useCookies } from './../../hooks/use-cookie/use-cookie';
 import "./user.css"
 
 export default function User() {
-    const navigate = useNavigate();
+    const navigate = useNavigate();    
     const { cookies } = useCookies();
     const userId = cookies.userId;
     
@@ -19,12 +19,9 @@ export default function User() {
     const [password, setPassword] = useState();
     const [newPassword, setNewPassword] = useState();
     const [newPasswordConfirm, setNewPasswordConfirm] = useState();
-
-    const [disableUsernameEdit, setDisableUsernameEdit] = useState(true);
-    const [disablePasswordEdit, setDisablePasswordEdit] = useState(true);
     
     const getUser = async () => {
-        axios.get(`http://localhost:8080/user/edit/${userId}`).then((response) => {
+        axios.get(`http://localhost:8080/customer/edit/${userId}`).then((response) => {
             if (response.data) {
                 setUser(response.data);
                 setName(response.data.name);
@@ -32,7 +29,7 @@ export default function User() {
                 setEmail(response.data.email);
                 setAddress(response.data.address);
                 setCountry(response.data.country);
-                setPassword(response.data.password);
+                setPassword("");
             }
         }).catch(error => console.log(error.message));
     }
@@ -51,37 +48,52 @@ export default function User() {
             address: user.address,
             country: user.country
         };
-        if (name != null && name !== user.name) {
+        if (name !== "" && name !== user.name) {
             form.name = name;
         }
-        if (email != null && email !== user.email) {
+        if (email !== "" && email !== user.email) {
             form.email = email;
         }
-        if (address != null && address !== user.address) {
+        if (address !== "" && address !== user.address) {
             form.address = address;
         }
-        if (country != null && country !== user.country) {
+        if (country !== "" && country !== user.country) {
             form.country = country;
         }
         
-        if (password != null)
-            if (password.equals(user.password)) {
-                if (newPassword != null && newPasswordConfirm != null) {
-                    if (newPassword.equals(newPasswordConfirm)) {
+        if (password !== "")
+            if (password === user.password) {
+                if (newPassword !== "" && newPasswordConfirm !== "") {
+                    if (newPassword === newPasswordConfirm) {
+                        console.log(password);
+                        console.log(newPassword);
                         form.password = newPassword;
                     }
-                    else
-                        console.log('Failed! re-password is wrong');
+                    else{
+                        alert('Failed! re-password is wrong');
+                        return;
+                    }
                 }
-                else
-                    console.log('Failed! Please enter the new password!');
+                else {
+                    alert('Failed! Please enter the new password!');
+                    return;
+                }
             }
-            else
-                console.log('Failed! Wrong password!');
+            else {
+                alert('Failed! Wrong password!');
+                return;
+            }
         
-        axios.post(`http://localhost:8080/user/edit/${userId}/update`, form).then((response) => {
-            if (response.data) {
-                navigate("/user")
+        axios.post(`http://localhost:8080/customer/edit/${userId}/update`, form).then((response) => {
+            console.log(response);
+            console.log(form);
+            if (response.data.errorMessage === undefined) {
+                alert("Successfully change profile");
+                navigate(0);
+                navigate("/user");
+            }
+            else {
+                alert(response.data.errorMessage);
             }
         }).catch((error) => console.log(error.message));
     }
@@ -115,15 +127,15 @@ export default function User() {
                 </div>
                 <div className="edit-info-form-section">
                     <tr><td className="edit-info-td"><label for="password">Old Password</label></td></tr>
-                    <tr><td className="edit-info-td"><input type='text' className="edit-info-item" name="password" value={password} readOnly={false} onChange={(e) => setPassword(e.target.value)}/></td></tr>
+                    <tr><td className="edit-info-td"><input type='password' className="edit-info-item" name="password" value={password} readOnly={false} onChange={(e) => setPassword(e.target.value)}/></td></tr>
                 </div>
                 <div className="edit-info-form-section">
                     <tr><td className="edit-info-td"><label for="newPassword">New Password</label></td></tr>
-                    <tr><td className="edit-info-td"><input type='text' className="edit-info-item" name="newPassword" value={newPassword} readOnly={false} onChange={(e) => setNewPassword(e.target.value)}/></td></tr>
+                    <tr><td className="edit-info-td"><input type='password' className="edit-info-item" name="newPassword" value={newPassword} readOnly={false} onChange={(e) => setNewPassword(e.target.value)}/></td></tr>
                 </div>
                 <div className="edit-info-form-section">
                     <tr><td className="edit-info-td"><label for="newPasswordConfirm">New Password Confirm</label></td></tr>
-                    <tr><td className="edit-info-td"><input type='text' className="edit-info-item" name="newPasswordConfirm" value={newPasswordConfirm} readOnly={false} onChange={(e) => setNewPassword(e.target.value)}/></td></tr>
+                    <tr><td className="edit-info-td"><input type='password' className="edit-info-item" name="newPasswordConfirm" value={newPasswordConfirm} readOnly={false} onChange={(e) => setNewPasswordConfirm(e.target.value)}/></td></tr>
                 </div>
               </tbody>
             </table>

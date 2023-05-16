@@ -7,4 +7,4 @@ npx create-react-app laptopshop \
 cd laptopshop \
 npm install react-router-dom --save \
 npm install js-cookie --save \
-npm install axios --save \
+npm install axios --save

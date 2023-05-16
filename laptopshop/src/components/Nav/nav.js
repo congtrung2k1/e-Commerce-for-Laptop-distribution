@@ -9,25 +9,25 @@ function Nav() {
 
   return (
     <nav>
-      <div className="logo-div">
-        <img src={logo} className="logo-img" alt="logo" />
-        <p>Laptop Shop</p>
-      </div>
+        <div className="logo-div">
+            <img src={logo} className="logo-img" alt="logo" />
+            <p>Laptop Shop</p>
+        </div>
       
-      <div className="sections">
-        <Link to="/product">Home</Link>
-        <Link to="/order">Your Orders</Link>
-        <Link to="/shipment">Your Shipments</Link>    
-      </div>
+        <div className="sections">
+            <Link to="/product">Home</Link>
+        </div>
       
     {
         isAuthenticated ? 
         <div className="sign-in">
-          <Link to="/user">Your Profife</Link>
+            <Link to="/order">Your Orders</Link>
+            <Link to="/shipment">Your Shipments</Link>    
+            <Link to="/user">Your Profife</Link>
         </div> 
         :
         <div className="sign-in">
-          <Link to="/signin">Sign in</Link>
+            <Link to="/signin">Sign in</Link>
         </div>
     }
     </nav>

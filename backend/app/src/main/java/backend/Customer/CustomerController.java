@@ -14,7 +14,7 @@ public class CustomerController {
     private CustomerService customerService; 
 
 // Get customer by customer_id
-    @GetMapping("/customer/{customerId}")
+    @GetMapping("/{customerId}")
     public Customer getCustomer(@PathVariable("customerId") String customerId) throws Exception {
         Integer customer_id = Integer.valueOf(customerId);
         List<Customer> customerList = customerService.getAllCustomer();
@@ -59,8 +59,14 @@ public class CustomerController {
 
 // Show order_id of customer orders 
     @GetMapping("/orders/{customerId}")
-    public List<String> getCustomerOrder(@PathVariable("customerId") String customerId) throws Exception {
+    public String getCustomerOrder(@PathVariable("customerId") String customerId) throws Exception {
         Integer customer_id = Integer.valueOf(customerId);
-        return customerService.getCustomerOrder(customer_id);
+        try {
+            ObjectMapper jsonMapper = new ObjectMapper();
+            return jsonMapper.writeValueAsString(customerService.getCustomerOrder(customer_id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{\"errorMessage\":\"Internal error\"}";
+        }
     }
 }

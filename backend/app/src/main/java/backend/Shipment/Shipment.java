@@ -28,7 +28,6 @@ public class Shipment implements Serializable {
     public Shipment() {}
     public Shipment(Integer orderId) {
         this.orderId = orderId;
-        this.shipmentStatus = "pending";
     }
 
     public Integer getShipmentId() {

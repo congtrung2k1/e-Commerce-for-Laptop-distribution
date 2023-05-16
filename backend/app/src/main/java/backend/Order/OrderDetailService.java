@@ -14,6 +14,9 @@ public class OrderDetailService {
     private OrderDetailRepository orderDetailRepository;
     
     @Autowired
+    private OrderService orderService;
+    
+    @Autowired
     private ProductService productService;
 
     public Iterable<OrderDetail> findAll() {
@@ -51,14 +54,10 @@ public class OrderDetailService {
         }
     }
         
-    public OrderDetail updateOrderDetail(Integer order_id, Integer product_id, Integer quantity) throws Exception {
+    public OrderDetail updateOrderDetail(Integer idx, Integer order_id, Integer product_id, Integer quantity) throws Exception {
         double price = productService.getProductByProductId(product_id).getPrice() * quantity;
-        List<String> idxList = orderDetailRepository.getIndexOfProductIdInOrderId(order_id, product_id);
-        if (idxList.size() == 1) {
-            Integer idx = Integer.valueOf(idxList.get(0));
-            orderDetailRepository.updateOrderDetail(idx, price, quantity);
-            return orderDetailRepository.findById(idx).get();
-        }
-        return null;
+        orderDetailRepository.updateOrderDetail(idx, price, quantity);
+        orderService.updateOrderPrice(order_id);
+        return getOrderDetailByIdx(idx);
     }
 }

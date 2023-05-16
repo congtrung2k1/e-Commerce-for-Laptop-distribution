@@ -41,18 +41,9 @@ public class OrderController {
         return null;
     }
     
-// Get order by order_id
-    @GetMapping("/edit/{orderId}")
-    public String getOrder(@PathVariable("orderId") String orderId) throws Exception {
-        Integer order_id = Integer.valueOf(orderId);        
-        Order order = orderService.getOrderByOrderId(order_id);
-        ObjectMapper jsonMapper = new ObjectMapper();
-        return jsonMapper.writeValueAsString(order);
-    }
-    
-// Get order by order_status
+// Get order by order_status - root only
     @GetMapping("/{order_status}")
-    public List<String> getOrderByStatus(@PathVariable("order_status") String order_status) throws Exception {
+    public List<String> getOrderByStatusRoot(@PathVariable("order_status") String order_status) throws Exception {
         List<String> result = null;
         List<Order> orderList = orderService.getAllOrder();
         for (Order order: orderList) {
@@ -61,6 +52,30 @@ public class OrderController {
             }
         }
         return result;
+    }
+    
+// Get order by order_status - user only
+    @GetMapping("/{customerId}_{order_status}")
+    public List<String> getOrderByStatusUser(@PathVariable("customerId") String customerId, @PathVariable("order_status") String order_status) throws Exception {
+        List<String> result = null;
+        Integer customer_id = Integer.valueOf(customerId);
+        List<String> orderList = customerService.getCustomerOrder(customer_id);
+        for (String orderId: orderList) {
+            Order order = orderService.getOrderByOrderId(Integer.valueOf(orderId));
+            if (order.getOrderStatus().equals(order_status)) {
+                result.add(String.valueOf(order.getOrderId()));
+            }
+        }
+        return result;
+    }
+    
+// Get order by order_id
+    @GetMapping("/edit/{orderId}")
+    public String getOrder(@PathVariable("orderId") String orderId) throws Exception {
+        Integer order_id = Integer.valueOf(orderId);        
+        Order order = orderService.getOrderByOrderId(order_id);
+        ObjectMapper jsonMapper = new ObjectMapper();
+        return jsonMapper.writeValueAsString(order);
     }
     
 // Update Order
@@ -80,29 +95,37 @@ public class OrderController {
             return jsonMapper.writeValueAsString(order);
         } catch (Exception e) {
             e.printStackTrace();
+            return "{\"errorMessage\":\"Internal server error\"}";
         }
-        return "{}";
     }
     
 // Start shipping
-    @PostMapping("/approve/{orderId}")
+// root only
+    @PostMapping("/{orderId}/approve")
     public String approveOrder(@RequestBody HashMap<String, String> order_form, @PathVariable("orderId") String orderId) throws Exception {        
-        Integer order_id = Integer.valueOf(orderId);
-        Shipment shipment = new Shipment(order_id);
-        shipmentService.save(shipment);
-        orderService.updateOrder(order_id, "submit");
+        ObjectMapper jsonMapper = new ObjectMapper();
         
-        List<Shipment> shipmentList = (List<Shipment>) shipmentService.findAll();
-        for (Shipment tmpShipment: shipmentList) {
-            if (tmpShipment.getOrderId() == order_id) {
-                return String.valueOf(tmpShipment.getShipmentId());
+        try {
+            Integer order_id = Integer.valueOf(orderId);
+            Shipment shipment = new Shipment(order_id);
+            shipmentService.save(shipment);
+            orderService.updateOrder(order_id, "shipping");
+            
+            List<Shipment> shipmentList = (List<Shipment>) shipmentService.findAll();
+            for (Shipment tmpShipment: shipmentList) {
+                if (tmpShipment.getOrderId() == order_id) {
+                    return jsonMapper.writeValueAsString(shipmentService.getShipment(tmpShipment.getShipmentId()));
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{\"errorMessage\":\"Internal server error\"}";
         }
         return null;
     }
 
 // Reject order
-    @PostMapping("/reject/{orderId}")
+    @PostMapping("/{orderId}/reject")
     public String rejectOrder(@PathVariable("orderId") String orderId) throws Exception {
         ObjectMapper jsonMapper = new ObjectMapper();
 

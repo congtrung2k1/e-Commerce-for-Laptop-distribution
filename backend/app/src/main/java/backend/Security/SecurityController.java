@@ -62,19 +62,19 @@ public class SecurityController {
         }
     }   
 
-    @PostMapping("/signin")
-    public Customer signIn(@RequestBody HashMap<String, String> data) {
-        String phone = data.get("phone");
-        String password = data.get("password");
-
-        List<Customer> customerList = customerService.getAllCustomer();
-        for (Customer customer: customerList) {
-            if ( customer.getPhone().equals(phone) && customer.getPassword().equals(password)) {
-                return customer;
-            }
-        }
-        return null;
-    }
+//    @PostMapping("/signin")
+//    public Customer signIn(@RequestBody HashMap<String, String> data) {
+//        String phone = data.get("phone");
+//        String password = data.get("password");
+//
+//        List<Customer> customerList = customerService.getAllCustomer();
+//        for (Customer customer: customerList) {
+//            if ( customer.getPhone().equals(phone) && customer.getPassword().equals(password)) {
+//                return customer;
+//            }
+//        }
+//        return null;
+//    }
    
     @PostMapping("/authenticate")
     public CustomerDTO authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{

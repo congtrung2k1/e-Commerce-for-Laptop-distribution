@@ -60,4 +60,15 @@ public class OrderService {
         orderRepository.updateOrder(order_id, order_status);
         return getOrderByOrderId(order_id);
     }
+    
+    public void updateOrderPrice(Integer order_id) throws Exception {
+        Order order = getOrderByOrderId(order_id);
+        
+        double amount = 0.0 - order.getDiscount();
+        List<String> priceList = orderRepository.getAllProductPrice(order_id);
+        for (String i: priceList)
+            amount += Double.parseDouble(i);
+
+        updateOrder(order_id, amount, order.getDescription(), order.getShippingAddr(), order.getShippingAddr(), order.getDiscount());
+    }
 }

@@ -1,6 +1,7 @@
 package backend.Product;
 
-import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,22 +17,23 @@ public class ProductController {
     }
     
 // Get product by product_id
-    @GetMapping("/product/{productId}")
-    public Product getProductByProductId(@PathVariable("productId") String productId) throws Exception {
-        Integer product_id = Integer.valueOf(productId);
-        List<Product> productList = productService.getAllProduct();
-        for (Product product: productList) {
-            if (product.getProductId() == product_id) {
-                return product;
-            }
-        }
-        return null;
+    @GetMapping("/{productId}")
+    public String getProductByProductId(@PathVariable("productId") String productId) throws Exception {
+        Integer product_id = Integer.valueOf(productId);        
+        Product product = productService.getProductByProductId(product_id);
+        ObjectMapper jsonMapper = new ObjectMapper();
+        return jsonMapper.writeValueAsString(product);
     }
     
 // Get product by product_id
-    @GetMapping("/product/category/{category}")
-    public List<Product> getProductByCategory(@PathVariable("name") String category) throws Exception {
+    @GetMapping("/category/{category}")
+    public List<String> getProductByCategory(@PathVariable("name") String category) throws Exception {
+        List<String> result = new ArrayList<>();
         List<Product> productList = productService.getProductByCategory(category);
-        return productList;
+        for (Product product: productList) {
+            ObjectMapper tmp = new ObjectMapper();
+            result.add(tmp.writeValueAsString(product));
+        }
+        return result;
     } 
 }

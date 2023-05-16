@@ -19,16 +19,17 @@ public class OrderDetailController {
     private ProductService productService;
     
 // Add product to order
-    @PostMapping("/order/{orderId}/add")
+    @PostMapping("/{orderId}/add")
     public String addOrderDetail(@RequestBody HashMap<String, String> orderDetail_form, @PathVariable("orderId") String orderId) throws Exception {
         
         Integer order_id = Integer.valueOf(orderId);
         Integer product_id = Integer.valueOf(orderDetail_form.get("product_id"));
+        Integer form_quantity = Integer.valueOf(orderDetail_form.get("quantity"));
 
         String idx = orderDetailService.getIndexOfProductIdInOrderId(order_id, product_id);
         if (!(idx.equals("-1"))) {
             Integer quantity = orderDetailService.getOrderDetailByIdx(Integer.valueOf(idx)).getQuantity();
-            orderDetailService.updateOrderDetail(order_id, product_id, quantity + 1);
+            orderDetailService.updateOrderDetail(Integer.valueOf(idx), order_id, product_id, quantity + form_quantity);
         }
         else {
             double price = productService.getProductByProductId(product_id).getPrice();
@@ -49,7 +50,7 @@ public class OrderDetailController {
         
         String idx = orderDetailService.getIndexOfProductIdInOrderId(order_id, product_id);
         if (!(idx.equals("-1"))) {
-            OrderDetail orderDetail = orderDetailService.updateOrderDetail(order_id, product_id, quantity);
+            OrderDetail orderDetail = orderDetailService.updateOrderDetail(Integer.valueOf(idx), order_id, product_id, quantity);
             return jsonMapper.writeValueAsString(orderDetail);
         }
         else {

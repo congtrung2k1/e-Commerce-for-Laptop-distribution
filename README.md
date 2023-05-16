@@ -3,7 +3,8 @@ This is our work on topic e-Commerce for Laptop distribution, which is a bi proj
 
 
 # Setup
-cd laptopshop
-npm install react-router-dom --save
-npm install js-cookie --save
-npm install axios --save
+npx create-react-app laptopshop \
+cd laptopshop \
+npm install react-router-dom --save \
+npm install js-cookie --save \
+npm install axios --save \

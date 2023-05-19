@@ -30,8 +30,8 @@ public class ProductService {
     }
 
     public List<Product> getProductByCategory(String category) throws Exception {
+        List<Product> res = new ArrayList<>();
         List<String> listProductId = (List<String>) productRepository.getProductIdByCategory(category);
-        List<Product> res = null;
         for (String product_id: listProductId) {
             Optional<Product> tmpProduct = productRepository.findById(Integer.valueOf(product_id));
             if (tmpProduct.isPresent()) {

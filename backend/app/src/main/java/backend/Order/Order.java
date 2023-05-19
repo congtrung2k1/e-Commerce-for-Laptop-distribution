@@ -15,8 +15,8 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
 
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "customer_id")
+    private int customer_id;
 
     @Column(name = "shipment_id")
     private int shipmentId;
@@ -29,11 +29,11 @@ public class Order implements Serializable {
 
     @Column(name = "shipping_addr")
     private String shippingAddr;
-
+    
     @Column(name = "order_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
-
+    
     @Column(name = "order_status")
     private String orderStatus;
 
@@ -41,8 +41,8 @@ public class Order implements Serializable {
     private double discount;
 
     public Order() {}
-    public Order(int userId, int shipmentId, double amount, String description, String shippingAddr, String orderStatus, double discount) {
-        this.userId = userId;
+    public Order(int customer_id, int shipmentId, double amount, String description, String shippingAddr, String orderStatus, double discount) {
+        this.customer_id = customer_id;
         this.shipmentId = shipmentId;
         this.amount = amount;
         this.description = description;
@@ -58,11 +58,11 @@ public class Order implements Serializable {
         this.orderId = orderId;
     }
 
-    public int getUserId() {
-        return this.userId;
+    public int getCustomerId() {
+        return this.customer_id;
     }
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCustomerId(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public int getShipmentId() {
@@ -109,22 +109,6 @@ public class Order implements Serializable {
     }
     public void setDiscount(double discount) {
         this.discount = discount;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (orderId != null ? orderId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Order)) {
-            return false;
-        }
-        Order other = (Order) object;
-        return !((this.orderId == null && other.orderId != null) || (this.orderId != null && !this.orderId.equals(other.orderId)));
     }
 
     @Override

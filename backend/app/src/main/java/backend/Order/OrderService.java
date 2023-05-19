@@ -56,8 +56,8 @@ public class OrderService {
         return getOrderByOrderId(order_id);
     }
 
-    public Order updateOrder(Integer order_id, String order_status) throws Exception {
-        orderRepository.updateOrder(order_id, order_status);
+    public Order updateOrderStatus(Integer order_id, String order_status) throws Exception {
+        orderRepository.updateOrderStatus(order_id, order_status);
         return getOrderByOrderId(order_id);
     }
     

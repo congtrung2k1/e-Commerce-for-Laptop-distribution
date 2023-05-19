@@ -18,22 +18,14 @@ public class ProductController {
     
 // Get product by product_id
     @GetMapping("/{productId}")
-    public String getProductByProductId(@PathVariable("productId") String productId) throws Exception {
+    public Product getProductByProductId(@PathVariable("productId") String productId) throws Exception {
         Integer product_id = Integer.valueOf(productId);        
-        Product product = productService.getProductByProductId(product_id);
-        ObjectMapper jsonMapper = new ObjectMapper();
-        return jsonMapper.writeValueAsString(product);
+        return productService.getProductByProductId(product_id);
     }
     
 // Get product by product_id
     @GetMapping("/category/{category}")
-    public List<String> getProductByCategory(@PathVariable("name") String category) throws Exception {
-        List<String> result = new ArrayList<>();
-        List<Product> productList = productService.getProductByCategory(category);
-        for (Product product: productList) {
-            ObjectMapper tmp = new ObjectMapper();
-            result.add(tmp.writeValueAsString(product));
-        }
-        return result;
+    public List<Product> getProductByCategory(@PathVariable("category") String category) throws Exception {
+        return productService.getProductByCategory(category);
     } 
 }

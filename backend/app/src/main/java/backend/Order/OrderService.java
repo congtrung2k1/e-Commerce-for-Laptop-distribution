@@ -69,6 +69,6 @@ public class OrderService {
         for (String i: priceList)
             amount += Double.parseDouble(i);
 
-        updateOrder(order_id, amount, order.getDescription(), order.getShippingAddr(), order.getShippingAddr(), order.getDiscount());
+        updateOrder(order_id, amount, order.getDescription(), order.getShippingAddr(), order.getOrderStatus(), order.getDiscount());
     }
 }

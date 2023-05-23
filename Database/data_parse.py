@@ -2,6 +2,7 @@ import csv
 import decimal
 import mysql.connector
 from datetime import datetime
+import random
 
 mydb = mysql.connector.connect(
   host="localhost",
@@ -30,11 +31,13 @@ with open('Amazon_Laptop_Specs.csv', 'r') as file:
 
         des = 'rank ' + ('unknown' if row[3] == '' else row[3]) + ' | ' + ('25.2 x 36.2 x 2 Centimeters' if row[7] == "" else row[7]) + ' | ' + ('4.3' if row[11] == "" else row[11])
 
+        image = f"/image/{str(random.randint(0, 14)).zfill(2)}.jpg"
+
         cursor = mydb.cursor()
         sql = """
                 INSERT INTO products (name, price, image, description, create_date, category) 
                 VALUES (%s, %s, %s, %s, %s, %s)
         """
-        value = (row[0], price, '', des, date, cate)
+        value = (row[0], price, image, des, date, cate)
         cursor.execute(sql, value)
         mydb.commit()

@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+.background {
+  background-image: url("../../assets/bg.jpg");
+  background-position: center;
+  background-size: cover;
+  color: black;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  overflow: hidden;
+}
+
+.show-order-wrapper {
+    margin: 80px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: 90%;
+}
+
+.show-order-list {
+    flex: 1;
+    overflow-y: auto;
+    width: 60vw;
+    box-shadow:  0 2px 10px 7px rgba(0, 0, 0, 0.08);
+}
+
+.show-order-title {
+    color: black;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.show-order-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: white;
+    margin-bottom: 30px;
+    color: black;
+}
+
+.show-order-item img {
+  width: 150px;
+  height: auto;
+  padding-left: 30px;
+}
+
+.show-order-item-general-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.show-order-item-title {
+    max-width: 30%;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    margin: auto;
+}
+
+.show-order-item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.show-order-info-item {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.show-order-pay-btn {
+    border-style: none;
+    background-color: rgb(152, 202, 237);
+    font-weight: bold;
+    font-size: 15px;
+    width: 30%;
+    height: auto;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.show-order-pay-btn:hover {
+    background-color: rgba(152, 202, 237, 0.7);
+}
+
+.show-order-pay-btn:hover > a {
+    color: white;
+} 
+
+.center-ver {
+    margin: auto;
+}
+
+.info {
+    flex: 1;
+    width: 40vw;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: black;
+}
+
+.info button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    color: black;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+.info-show-button:hover {
+  background-color: #0074D9;  
+}
+
+
+.edit-info-body {
+    font-family: "Montserrat", sans-serif;
+    background-image: url("../../assets/bg.jpg");
+    margin: 0 auto;
+    background-size: cover;
+    color: black;
+    right: 0;
+    left: 0;
+}
+
+.edit-info-form-description {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+    background-color: rgb(152, 202, 237);
+    padding: 30px 0 30px 0;
+}
+
+.edit-info-form {
+    font-weight: bold;
+    background-color: white;
+    width: auto;
+    height: auto;
+    margin: 80px 0 0 0;
+}
+
+.edit-info-table {
+    margin: 40px 0 20px 90px;
+}
+
+.edit-info-form-section {
+    margin-bottom: 10px;
+}
+
+.edit-info-td {
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    padding-right: 15px;
+}
+
+.edit-info-edit-btn {
+    margin-right: 10px;
+    border-style: none;
+    background-color: rgb(152, 202, 237);
+    font-size: 16px;
+    width: auto;
+    height: auto;
+}
+
+.edit-info-edit-btn:hover {
+    background-color: rgba(152, 202, 237, 0.7);
+}
+
+.edit-info-order-type {
+    font-weight: normal;
+}

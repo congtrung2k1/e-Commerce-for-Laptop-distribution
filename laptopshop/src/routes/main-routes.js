@@ -10,27 +10,32 @@ import Edit from '../pages/edit/edit';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import PrivateRoute from './private-route';
+import { PrivateRoute } from './private-route';
 import Nav from '../components/Nav/nav';
 
-function MainRoutes() {
+import { routes } from './routes';
+
+const MainRoutes = () => {
   return (
     <BrowserRouter>
       <Nav />
-      <div>
-        <Routes>
-            <Route path="/signin" exact element={<SignIn />} />
-            <Route path="/signup" exact element={<SignUp />} />
-            <Route path="/" exact element={<PrivateRoute Component={Product} />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/user" element={<User />} />
-            <Route path="/order" element={<Order />} />
-            <Route path="/shipment" element={<Shipment />} />
-            <Route path="/edit" element={<Edit />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path={routes.loginUrl} exact element={<SignIn />} />
+        <Route path={routes.registerUrl} exact element={<SignUp />} />
+
+        <Route path="/product" exact element={
+          <PrivateRoute>
+            <Product />
+          </PrivateRoute>
+        } />
+        <Route path="/user" element={<User />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/order/:orderId" element={<Order />} />
+        <Route path="/shipment" element={<Shipment />} />
+        <Route path="/edit" element={<Edit />} />
+      </Routes>
     </BrowserRouter>
   );
-}
+};
 
-export default MainRoutes
+export default MainRoutes;

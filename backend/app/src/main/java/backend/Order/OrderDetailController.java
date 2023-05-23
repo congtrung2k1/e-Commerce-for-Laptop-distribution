@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import backend.Product.ProductService;
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/orderdetail")

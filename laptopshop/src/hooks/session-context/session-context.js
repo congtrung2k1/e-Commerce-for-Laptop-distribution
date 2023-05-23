@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 export const SessionContext = createContext({
-    data: '',
+    data: {},
     loginUrl: '',
     isAuthenticated: false,
     removeAuthCookies: () => {}

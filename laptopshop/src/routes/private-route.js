@@ -1,24 +1,22 @@
 import React from 'react';
-import { Navigate, Route, useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
 import { SessionContext } from './../hooks/session-context/session-context';
+import { routes } from './routes';
 
-const PrivateRoute = ({ Component }) => {
+const PrivateRoute = ({ children }) => {
     const { isAuthenticated } = useContext(SessionContext) || {};
 
     const { location } = useLocation();
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isAuthenticated)
-            return navigate({ path: "/" });
-    }, [navigate, location, isAuthenticated]);
-
-//    if (!isAuthenticated) {
-//        return <Navigate to='/signin' state={{ from: location }} />;
-//    };
-    return <Component />;
+        if(isAuthenticated) return;
+        
+        return navigate({ path: routes.loginUrl });
+    }, [navigate, location, isAuthenticated]);  
+    return isAuthenticated ? children : <Navigate to="/" replace={true}/>;
 };
 
-export default PrivateRoute
+export { PrivateRoute };

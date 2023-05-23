@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import backend.Customer.CustomerService;
+import backend.Product.Product;
+import backend.Product.ProductRepository;
 import backend.Shipment.Shipment;
 import backend.Shipment.ShipmentService;
 
@@ -26,6 +28,9 @@ public class OrderController {
     @Autowired
     private ShipmentService shipmentService;
     
+    @Autowired   
+    private ProductRepository productRepository;
+    
     @PostMapping("/create/{customerId}")
     public Order createOrder(@PathVariable("customerId") String customerId) throws Exception {
         Integer customer_id = Integer.valueOf(customerId);
@@ -38,7 +43,6 @@ public class OrderController {
         
         Order order = new Order(customer_id, shipmentId, amount, description, shippingAddr, orderStatus, discount);
         orderService.save(order);
-        
         List<Order> orderList = orderService.getAllOrder();
         for (Order x: orderList) 
             if (x.getCustomerId() == customer_id && x.getOrderStatus().equals(orderStatus))
@@ -81,6 +85,24 @@ public class OrderController {
         return orderDetailService.getAllOrderDetail(order_id);
     }
     
+// Get list Product
+    @GetMapping("/{orderId}/getproduct")
+    public List<Product> getAllProductByOrderDetail(@PathVariable("orderId") String orderId) throws Exception {
+        List<OrderDetail> tmpList = getAllOrderDetail(orderId);
+        List<Product> result = new ArrayList<>();
+        for (OrderDetail tmp: tmpList) {
+            result.add(productRepository.findById(tmp.getProductId()).get());
+        }
+        return result;
+    }
+    
+// Submit order
+    @PostMapping("/{orderId}/submit")
+    public Order submitOrder(@PathVariable("orderId") String orderId) throws Exception {
+        Integer order_id = Integer.valueOf(orderId);
+        return orderService.updateOrderStatus(order_id, "submit");
+    }
+    
 // Get order by order_id
     @GetMapping("/edit/{orderId}")
     public Order getOrder(@PathVariable("orderId") String orderId) throws Exception {
@@ -92,13 +114,14 @@ public class OrderController {
     @PostMapping("/edit/{orderId}/update")
     public Order updateOrder(@RequestBody HashMap<String, String> order_form, @PathVariable("orderId") String orderId) throws Exception {
         Integer order_id = Integer.valueOf(orderId);
-        double amount = Double.parseDouble(order_form.get("amount"));
         String description = order_form.get("description");
         String shippingAddr = order_form.get("shippingAddr");
         String orderStatus = order_form.get("order_status");
         double discount = Double.parseDouble(order_form.get("discount"));
-        if (discount != 0.0) amount -= discount;
-        return orderService.updateOrder(order_id, amount, description, shippingAddr, orderStatus, discount);
+        
+        orderService.updateOrder(order_id, 0.0, description, shippingAddr, orderStatus, discount);
+        orderService.updateOrderPrice(order_id);
+        return orderService.getOrderByOrderId(order_id);
     }
     
 // Start shipping

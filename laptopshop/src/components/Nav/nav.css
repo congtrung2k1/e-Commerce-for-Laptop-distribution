@@ -3,7 +3,6 @@
 nav {
     background-color: white;
     overflow: auto;
-    position: fixed;
     right: 0;
     left: 0;
     top: 0;
@@ -12,10 +11,11 @@ nav {
     align-items: center;
     box-shadow: 1px 2px 15px 3px rgba(0, 0, 0, 0.1);
     padding: 5px 30px 5px 30px;
-    z-index: 1;
+    z-index: 1000;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
     font-size: 15px;
+    position:fixed;
 }
 
 .logo-div {
@@ -33,7 +33,7 @@ img {
 .sections {
     display: flex;
     justify-content: space-between;
-    width: 900px;
+    width: 450px;
 }
 
 body {

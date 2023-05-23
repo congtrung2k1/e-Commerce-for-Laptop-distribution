@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from './../../hooks/use-cookie/use-cookie';
-import logo from "../../assets/login_bg.jpg";
 
 import "./signin.css";
+import { postAuthentication } from "../../resources/authenticate";
 
 function SignIn () {
     const navigate = useNavigate();
@@ -15,28 +15,26 @@ function SignIn () {
     const [password, setPassword] = useState(null);
     const [userId, setUserId] = useState(null);
     
-    const handleSignin = (event) => {
+    const handleSignin = async (event) => {
         event.preventDefault();
         const form = {
             username: phone,
             password: password
         };
+        try {
+            const data = await postAuthentication(phone, password);
 
-        axios.post('http://localhost:8080/authenticate', form).then(response => {
-            if(response.data.token) {
-                setUserId(response.data.userId);
-                setCookie("jwt", response.data.token);
-                setCookie("userId", response.data.userId);
-                setCookie("phone", response.data.phone);
-                navigate("/user", {isAuthenticated: true});
+            if (data.token) {
+                setUserId(data.userId);
+                setCookie("jwt", data.token);
+                setCookie("userId", data.userId);
+                setCookie("phone", data.phone);
+                navigate("/user", { isAuthenticated: true });
             }
-            else {
-                alert("Internal server error!");
-            }
-        }).catch(error => {
-            console.log(error.message);
-            alert("Login FAILED! Please check again!");
-        });
+        }
+        catch(e) {
+            console.log(e);
+        }
     };
 
     return (

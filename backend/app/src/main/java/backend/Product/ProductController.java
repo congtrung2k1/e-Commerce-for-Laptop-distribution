@@ -1,6 +1,5 @@
 package backend.Product;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,13 @@ public class ProductController {
 
     public List<Product> findAll() {
         return productService.getAllProduct();
+    }
+
+    // Get all product
+    @GetMapping("")
+    public List<Product> getAllProduct() throws Exception {
+        List<Product> result = (List<Product>) productService.findAll();
+        return result;
     }
     
 // Get product by product_id

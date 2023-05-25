@@ -62,19 +62,6 @@ const Order = () => {
     const [orderStatus, setOrderStatus] = useState([]);
     const [discount, setDiscount] = useState([]);
     
-    const getPendingOrderId = async () => {
-        getUserPendingOrder(userId, "pending").then((response) => {
-            if (response.length !== 0) {
-                const newOrderId = response[0].orderId;
-                navigate(0);
-                navigate(`/order/${newOrderId}`);
-            } else {
-                alert("You did not choose any item. Please go shopping first :D !!!");
-                navigate("/product");
-            }
-        });
-    };
-
     const getOrderInfor = async (orderId) => {
         getOrderInformation(orderId).then((data) => {
             if (data) {
@@ -131,19 +118,23 @@ const Order = () => {
             discount: discount
         };
         updateOrder(orderInfor.orderId, form);
-        navigate(`/order/${orderId}`);
     };
 
     const handleSubmit = async () => {
-        handleSave();
-        submitToSeller(orderInfor.orderId);
+        const form = {
+            description: description,
+            shippingAddr: shippingAddr,
+            order_status: "submit",
+            discount: discount
+        };
+        updateOrder(orderInfor.orderId, form);
     };
 
     const handleApprove = async () => {
         approveOrder(orderId).then((response) => {
            if (response.data) {
-                navigate(0);
-                navigate(`/shipment/${response.data.shipmentId}`);
+               alert(response.data.shipmentId);
+               navigate(`/shipment/${response.data.shipmentId}`);
            }
         });
     };
@@ -152,19 +143,16 @@ const Order = () => {
         rejectOrder(orderId).then((response) => {
            if (response.data) {
                 navigate(0);
-                navigate(`/shipment/${response.data.shipmentId}`);
+                navigate(`/order`);
            }
         });
     };
 
     useEffect(() => {
         getUser();
-        if (orderId === undefined) getPendingOrderId();
-        else {
-            getOrderInfor(orderId);
-            getOrderDetailOfOrder(orderId);
-        }
-    }, []);
+        getOrderInfor(orderId);
+        getOrderDetailOfOrder(orderId);
+    }, [orderId]);
 
     const showProduct = () => {
         const arr = [];
@@ -192,13 +180,11 @@ const Order = () => {
                         </div>
                     </div>
                     );
-        }
-        ;
+        };
         return arr;
     };
 
     const showOrder = () => {
-        const arr = [];
         let roNote;
         let roAddr;
         let roStat;
@@ -229,7 +215,7 @@ const Order = () => {
             }
         }
         
-        arr.push(
+        return (
                 <form className="edit-info-form">
                     <table className="edit-info-table">
                         <tbody>
@@ -262,12 +248,11 @@ const Order = () => {
                         </tbody>
                     </table>
                 </form>
-                );
-        return arr;
+        );
     };
 
     return (
-            <div className="background">
+            <div className="backgroundorder">
                 <div className="show-order-wrapper">
                     <div className="show-order-list">
                         {showProduct()}
@@ -277,7 +262,7 @@ const Order = () => {
                     </div>
                 </div>
             </div>
-            );
+    );
 };
 
 export default Order;

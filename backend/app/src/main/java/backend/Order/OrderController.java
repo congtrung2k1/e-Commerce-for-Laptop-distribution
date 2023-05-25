@@ -50,6 +50,28 @@ public class OrderController {
         return null;
     }
     
+// get all order
+// root
+    @GetMapping("/root")
+    public List<Order> getAllOrderRoot() throws Exception {
+        return (List<Order>) orderService.findAll();
+    }
+    
+// get all order
+// user
+    @GetMapping("/user/{customerId}")
+    public List<Order> getAllOrderUser(@PathVariable("customerId") String customerId) throws Exception {
+        Integer customer_id = Integer.valueOf(customerId);
+        List<Order> res = new ArrayList<>();
+        List<Order> orderList = (List<Order>) orderService.findAll();
+        for (Order tmp: orderList) {
+            if (tmp.getCustomerId() == customer_id) 
+                res.add(tmp);
+        }
+        return res;
+    }
+
+    
 // Get order by order_status - root only
     @GetMapping("/{order_status}")
     public List<Order> getOrderByStatusRoot(@PathVariable("order_status") String order_status) throws Exception {
@@ -100,6 +122,7 @@ public class OrderController {
     @PostMapping("/{orderId}/submit")
     public Order submitOrder(@PathVariable("orderId") String orderId) throws Exception {
         Integer order_id = Integer.valueOf(orderId);
+        System.out.println(order_id);
         return orderService.updateOrderStatus(order_id, "submit");
     }
     
@@ -136,7 +159,9 @@ public class OrderController {
         List<Shipment> shipmentList = (List<Shipment>) shipmentService.findAll();
         for (Shipment tmpShipment: shipmentList) {
             if (tmpShipment.getOrderId() == order_id) {
-                return shipmentService.getShipment(tmpShipment.getShipmentId());
+                shipment = shipmentService.getShipment(tmpShipment.getShipmentId());
+                orderService.updateOrderShipment(order_id, shipment.getShipmentId());
+                return shipment;
             }
         }
         return null;

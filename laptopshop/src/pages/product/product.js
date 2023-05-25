@@ -39,14 +39,15 @@ const Product = () => {
                     if (data)
                         setPendingOrder(data);
                 });
-            console.log(pendingOrder.orderId);
-            const form = {
-                product_id: productId,
-                quantity: 1
-            };
-            addToOrder(pendingOrder.orderId, form).then(() => {
-                alert("Successfully add item");
-            });
+            if (pendingOrder.orderId !== undefined) {
+                const form = {
+                    product_id: productId,
+                    quantity: 1
+                };
+                addToOrder(pendingOrder.orderId, form).then(() => {
+                    alert("Successfully add item");
+                });
+            }
         }).catch((error) => console.log(error.message));
     };
 

@@ -1,5 +1,17 @@
 import axios from 'axios';
 
+const getAllRootOrder = async () => {
+    const url = `http://localhost:8080/order/root`;
+    const result = await axios.get(url);
+    return result.data;
+};
+
+const getAllUserOrder = async (customerId) => {
+    const url = `http://localhost:8080/order/user/${customerId}`;
+    const result = await axios.get(url);
+    return result.data;
+};
+
 const getOrderInformation = async (orderId) => {
     const url = `http://localhost:8080/order/edit/${orderId}`;
     const result = await axios.get(url);
@@ -35,7 +47,6 @@ const removeOrderDetail = async (idx) => {
     const result = await axios.post(url);
     return result.data;
 };
-
 
 const updateOrderDetail = async (orderId, data) => {
     const url = `http://localhost:8080/orderdetail/${orderId}/add`;
@@ -74,6 +85,8 @@ const rejectOrder = async (orderId) => {
 };
 
 export { 
+    getAllRootOrder,
+    getAllUserOrder,
     getOrderInformation,
     getProductByOrderDetail,
     getOrderDetail,

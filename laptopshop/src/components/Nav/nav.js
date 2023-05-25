@@ -23,8 +23,13 @@ const  Nav = () => {
       
     {
         isAuthenticated ? 
-        <div className="sign-in">
-          <Link to={routes.user}>Your Profife</Link>
+        <div>
+            <div className="sign-in">
+                <Link to={routes.user}>Your Profife</Link>
+            </div>
+            <div className="sign-in">
+                <Link to={routes.logout}>Sign Out</Link>
+            </div>
         </div> 
         :
         <div className="sign-in">

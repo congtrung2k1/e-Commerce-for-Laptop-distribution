@@ -22,4 +22,8 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
     @Modifying
     @Query(value = "UPDATE orders SET order_status = ?2 WHERE order_id = ?1", nativeQuery = true)
     void updateOrderStatus(Integer order_id, String order_status);
+    
+    @Modifying
+    @Query(value = "UPDATE orders SET shipment_id = ?2 WHERE order_id = ?1", nativeQuery = true)
+    void updateOrderShipment(Integer order_id, Integer shipment_id);
 }

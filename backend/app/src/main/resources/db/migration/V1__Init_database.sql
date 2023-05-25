@@ -62,4 +62,3 @@ CREATE TABLE products (
   category VARCHAR(255) NOT NULL,
   PRIMARY KEY (product_id)
 );
-

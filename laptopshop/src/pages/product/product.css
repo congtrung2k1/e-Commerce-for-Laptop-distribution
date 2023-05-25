@@ -8,15 +8,14 @@
 .background {
     background-image: url("../../assets/bg.jpg");
     background-position: center;
+    background-size: initial;
     margin: 0 auto;
-    background-size: cover;
     color: black;
     top: 0;
     right: 0;
     left: 0;
     display: flex;
-    position: fixed;
-    overflow-x: auto;
+    overflow: auto;
 }
 
 .show-product-wrapper {
@@ -24,9 +23,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .show-product-list {
+    flex: 1;
+    overflow-y: auto;
     margin: 30px 0 0 40px;
     display: grid;
     flex-wrap: wrap;

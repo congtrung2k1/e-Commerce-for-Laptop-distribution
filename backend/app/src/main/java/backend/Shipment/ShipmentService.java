@@ -1,5 +1,6 @@
 package backend.Shipment;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,15 @@ public class ShipmentService {
         return allShipment;
     }
     
+    public List<Shipment> getAllByUser(Integer userId) {
+        List<Shipment> res = new ArrayList<>();
+        List<String> allShipment = shipmentRepository.getAllByUserId(userId);
+        for (String tmpShipmentId: allShipment) {
+            res.add(shipmentRepository.findById(Integer.valueOf(tmpShipmentId)).get());
+        }
+        return res;
+    }
+    
     public Shipment getShipment(int shipment_id) throws Exception {
         Optional<Shipment> tmpShipment = shipmentRepository.findById(shipment_id);
         if (tmpShipment.isPresent()) {
@@ -27,6 +37,11 @@ public class ShipmentService {
         } else {
             throw new Exception("Shipment with id: " + shipment_id + " not found");
         }
+    }
+    
+    public Shipment getShipmentByOrderId(int orderId) throws Exception {
+        String shipmentId = shipmentRepository.getShipmentByOrderId(orderId);
+        return shipmentRepository.findById(Integer.valueOf(shipmentId)).get();
     }
 
     public void save (Shipment shipment) {

@@ -4,6 +4,7 @@ import SignIn from '../pages/signin/signin';
 import SignUp from '../pages/signup/signup';
 import SignOut from '../pages/signin/signout';
 import Product from '../pages/product/product';
+import ProductShow from '../pages/product/productshow';
 import User from '../pages/user/user';
 import Order from '../pages/order/order';
 import OrderAll from '../pages/order/orderall';
@@ -30,6 +31,11 @@ const MainRoutes = () => {
           <PrivateRoute>
             <Product />
           </PrivateRoute>
+        } />
+        <Route path="/product/:productId" element={
+            <PrivateRoute>
+                <ProductShow />
+            </PrivateRoute>
         } />
         <Route path="/user" element={<User />} />
         <Route path="/order" element={<OrderAll />} />

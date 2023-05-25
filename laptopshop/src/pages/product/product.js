@@ -53,7 +53,7 @@ const Product = () => {
 
     const showProduct = async (product_id) => {
         getProductById(product_id).then((data) => {
-            navigate("/user", { isAuthenticated: true, data: data });
+            navigate(`/product/${product_id}`);
         }).catch((error) => console.log(error.message));
     };
     

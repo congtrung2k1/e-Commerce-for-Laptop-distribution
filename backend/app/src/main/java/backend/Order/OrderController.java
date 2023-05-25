@@ -122,7 +122,6 @@ public class OrderController {
     @PostMapping("/{orderId}/submit")
     public Order submitOrder(@PathVariable("orderId") String orderId) throws Exception {
         Integer order_id = Integer.valueOf(orderId);
-        System.out.println(order_id);
         return orderService.updateOrderStatus(order_id, "submit");
     }
     
@@ -154,12 +153,14 @@ public class OrderController {
         Integer order_id = Integer.valueOf(orderId);
         Shipment shipment = new Shipment(order_id);
         shipmentService.save(shipment);
-        orderService.updateOrderStatus(order_id, "shipping");
 
         List<Shipment> shipmentList = (List<Shipment>) shipmentService.findAll();
         for (Shipment tmpShipment: shipmentList) {
             if (tmpShipment.getOrderId() == order_id) {
                 shipment = shipmentService.getShipment(tmpShipment.getShipmentId());
+                shipmentService.updateShipment(shipment.getShipmentId(), "pending");
+                
+                orderService.updateOrderStatus(order_id, "shipping");
                 orderService.updateOrderShipment(order_id, shipment.getShipmentId());
                 return shipment;
             }

@@ -23,7 +23,7 @@ public class Shipment implements Serializable {
     private Date shipmentDate;
 
     @Column(name = "shipment_status")
-    private String shipmentStatus = "pending";
+    private String shipmentStatus = "";
 
     public Shipment() {}
     public Shipment(Integer orderId) {

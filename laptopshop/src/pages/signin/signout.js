@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from './../../hooks/use-cookie/use-cookie';
-
-import { postAuthentication } from "../../resources/authenticate";
 
 const SignOut = () => {
     const navigate = useNavigate();

@@ -100,47 +100,47 @@ export default function User() {
     }
 
     return (
-        <div className="edit-info-body">
-            <div className="edit-info-form-wrapper">
-                <form className="edit-info-form" onSubmit={handleSubmit}>
-                    <h3 className="edit-info-form-description">Your info</h3>
-                    <table className="edit-info-table">
+        <div className="edit-user-body">
+            <div className="edit-user-form-wrapper">
+                <form className="edit-user-form" onSubmit={handleSubmit}>
+                    <h3 className="edit-user-form-description">Your info</h3>
+                    <table className="edit-user-table">
                       <tbody>
-                        <div className="edit-info-form-section">
-                          <tr><td className="edit-info-td"><label for="phone">Phone</label></td></tr>
-                          <tr><td className="edit-info-td"><input type='text' className="edit-info-name" name="phone" value={phone} readOnly={true}/></td></tr>
+                        <div className="edit-user-form-section">
+                          <tr><td className="edit-user-td"><label for="phone">Phone</label></td></tr>
+                          <tr><td className="edit-user-td"><input type='text' className="edit-user-name" name="phone" value={phone} readOnly={true}/></td></tr>
                         </div>
-                        <div className="edit-info-form-section">
-                            <tr><td className="edit-info-td"><label for="name">Name</label></td></tr>
-                            <tr><td className="edit-info-td"><input type='text' className="edit-info-item" name="name" value={name} readOnly={false} onChange={(e) => setName(e.target.value)}/></td></tr>
+                        <div className="edit-user-form-section">
+                            <tr><td className="edit-user-td"><label for="name">Name</label></td></tr>
+                            <tr><td className="edit-user-td"><input type='text' className="edit-user-item" name="name" value={name} readOnly={false} onChange={(e) => setName(e.target.value)}/></td></tr>
                         </div>
-                        <div className="edit-info-form-section">
-                            <tr><td className="edit-info-td"><label for="email">Email</label></td></tr>
-                            <tr><td className="edit-info-td"><input type='text' className="edit-info-item" name="email" value={email} readOnly={false} onChange={(e) => setEmail(e.target.value)}/></td></tr>
+                        <div className="edit-user-form-section">
+                            <tr><td className="edit-user-td"><label for="email">Email</label></td></tr>
+                            <tr><td className="edit-user-td"><input type='text' className="edit-user-item" name="email" value={email} readOnly={false} onChange={(e) => setEmail(e.target.value)}/></td></tr>
                         </div>
-                        <div className="edit-info-form-section">
-                            <tr><td className="edit-info-td"><label for="address">Address</label></td></tr>
-                            <tr><td className="edit-info-td"><input type='text' className="edit-info-item" name="address" value={address} readOnly={false} onChange={(e) => setAddress(e.target.value)}/></td></tr>
+                        <div className="edit-user-form-section">
+                            <tr><td className="edit-user-td"><label for="address">Address</label></td></tr>
+                            <tr><td className="edit-user-td"><input type='text' className="edit-user-item" name="address" value={address} readOnly={false} onChange={(e) => setAddress(e.target.value)}/></td></tr>
                         </div>
-                        <div className="edit-info-form-section">
-                            <tr><td className="edit-info-td"><label for="country">Country</label></td></tr>
-                            <tr><td className="edit-info-td"><input type='text' className="edit-info-item" name="country" value={country} readOnly={false} onChange={(e) => setCountry(e.target.value)}/></td></tr>
+                        <div className="edit-user-form-section">
+                            <tr><td className="edit-user-td"><label for="country">Country</label></td></tr>
+                            <tr><td className="edit-user-td"><input type='text' className="edit-user-item" name="country" value={country} readOnly={false} onChange={(e) => setCountry(e.target.value)}/></td></tr>
                         </div>
-                        <div className="edit-info-form-section">
-                            <tr><td className="edit-info-td"><label for="password">Old Password</label></td></tr>
-                            <tr><td className="edit-info-td"><input type='password' className="edit-info-item" name="password" value={password} readOnly={false} onChange={(e) => setPassword(e.target.value)}/></td></tr>
+                        <div className="edit-user-form-section">
+                            <tr><td className="edit-user-td"><label for="password">Old Password</label></td></tr>
+                            <tr><td className="edit-user-td"><input type='password' className="edit-user-item" name="password" value={password} readOnly={false} onChange={(e) => setPassword(e.target.value)}/></td></tr>
                         </div>
-                        <div className="edit-info-form-section">
-                            <tr><td className="edit-info-td"><label for="newPassword">New Password</label></td></tr>
-                            <tr><td className="edit-info-td"><input type='password' className="edit-info-item" name="newPassword" value={newPassword} readOnly={false} onChange={(e) => setNewPassword(e.target.value)}/></td></tr>
+                        <div className="edit-user-form-section">
+                            <tr><td className="edit-user-td"><label for="newPassword">New Password</label></td></tr>
+                            <tr><td className="edit-user-td"><input type='password' className="edit-user-item" name="newPassword" value={newPassword} readOnly={false} onChange={(e) => setNewPassword(e.target.value)}/></td></tr>
                         </div>
-                        <div className="edit-info-form-section">
-                            <tr><td className="edit-info-td"><label for="newPasswordConfirm">New Password Confirm</label></td></tr>
-                            <tr><td className="edit-info-td"><input type='password' className="edit-info-item" name="newPasswordConfirm" value={newPasswordConfirm} readOnly={false} onChange={(e) => setNewPasswordConfirm(e.target.value)}/></td></tr>
+                        <div className="edit-user-form-section">
+                            <tr><td className="edit-user-td"><label for="newPasswordConfirm">New Password Confirm</label></td></tr>
+                            <tr><td className="edit-user-td"><input type='password' className="edit-user-item" name="newPasswordConfirm" value={newPasswordConfirm} readOnly={false} onChange={(e) => setNewPasswordConfirm(e.target.value)}/></td></tr>
                         </div>
                       </tbody>
                     </table>
-                    <input className="edit-info-submit-btn" type="submit" value="Submit"/>
+                    <input className="edit-user-submit-btn" type="submit" value="Submit"/>
                 </form>
             </div>
       </div>

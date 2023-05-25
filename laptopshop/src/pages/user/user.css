@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-.edit-info-body {
+.edit-user-body {
     font-family: "Montserrat", sans-serif;
     background-image: url("../../assets/bg.jpg");
     margin: 0 auto;
@@ -10,7 +10,7 @@
     left: 0;
 }
 
-.edit-info-form-description {
+.edit-user-form-description {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
@@ -19,7 +19,7 @@
     padding: 30px 0 30px 0;
 }
 
-.edit-info-form {
+.edit-user-form {
     font-weight: bold;
     margin: 0 auto;
     margin-top: 65px;
@@ -29,30 +29,30 @@
     background-color: white;
 }
 
-.edit-info-table {
+.edit-user-table {
     margin: 40px 0 20px 90px;
 }
 
-.edit-info-form-section {
+.edit-user-form-section {
     margin-bottom: 10px;
 }
 
-.edit-info-td {
+.edit-user-td {
     font-weight: bold;
     color: black;
     font-size: 16px;
     padding-right: 15px;
 }
 
-input.edit-info-name {
+input.edit-user-name {
     width: 245px;
 }
 
-input.edit-info-item {
+input.edit-user-item {
     width: 415px;
 }
 
-.edit-info-edit-btn {
+.edit-user-edit-btn {
     border-style: none;
     background-color: rgb(152, 202, 237);
     font-size: 16px;
@@ -60,11 +60,11 @@ input.edit-info-item {
     height: 40px;
 }
 
-.edit-info-edit-btn:hover {
+.edit-user-edit-btn:hover {
     background-color: rgba(152, 202, 237, 0.7);
 }
 
-.edit-info-booking-type {
+.edit-user-booking-type {
     font-weight: normal;
 }
 
@@ -79,18 +79,18 @@ input[type="radio"] {
     margin: 0 10px 0 10px;
 }
 
-.edit-info-seat-selection-id {
+.edit-user-seat-selection-id {
     border-style: none;
     padding: 5px 15px 5px 15px;
     margin-right: 25px;
 }
 
-.edit-info-seat-selection-id:hover {
+.edit-user-seat-selection-id:hover {
     background-color: rgb(152, 202, 237);
     box-shadow: 2px 1px 5px 3px rgba(0, 0, 0, 0.08);
 }
 
-.edit-info-submit-btn {
+.edit-user-submit-btn {
     border-style: none;
     background-color: rgb(152, 202, 237);
     font-weight: bold;
@@ -100,6 +100,6 @@ input[type="radio"] {
     margin-left: 90px;
 }
 
-.edit-info-submit-btn:hover {
+.edit-user-submit-btn:hover {
     background-color: rgba(152, 202, 237, 0.7);
 }

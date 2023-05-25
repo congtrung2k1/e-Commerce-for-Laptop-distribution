@@ -30,6 +30,7 @@ function SignIn () {
                 setCookie("userId", data.userId);
                 setCookie("phone", data.phone);
                 navigate("/user", { isAuthenticated: true });
+                navigate(0);
             }
         }
         catch(e) {

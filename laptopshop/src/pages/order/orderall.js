@@ -105,6 +105,8 @@ const OrderAll = () => {
                     <div className="edit-shipment-form-section">
                         <div className="edit-shipment-td">
                             <a href={`/order/${item.orderId}`}>Order Number {item.orderId}</a>
+                            <span>   ________  </span>
+                            <a href={`/shipment/${item.shipmentId}`}>Shipment Number {item.shipmentId}</a>
                         </div>
                     </div> 
                 );
@@ -124,6 +126,8 @@ const OrderAll = () => {
                     <div className="edit-shipment-form-section">
                         <div className="edit-shipment-td">
                             <a href={`/order/${item.orderId}`}>Order Number {item.orderId}</a>
+                            <span>   ________  </span>
+                            <a href={`/shipment/${item.shipmentId}`}>Shipment Number {item.shipmentId}</a>
                         </div>
                     </div> 
                 );
@@ -143,6 +147,8 @@ const OrderAll = () => {
                     <div className="edit-shipment-form-section">
                         <div className="edit-shipment-td">
                             <a href={`/order/${item.orderId}`}>Order Number {item.orderId}</a>
+                            <span>   ________  </span>
+                            <a href={`/shipment/${item.shipmentId}`}>Shipment Number {item.shipmentId}</a>
                         </div>
                     </div> 
                 );

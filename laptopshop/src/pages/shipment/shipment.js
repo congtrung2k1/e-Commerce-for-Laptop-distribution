@@ -82,7 +82,7 @@ const Shipment = () => {
                     }
                     if (!flag) {
                         alert("You do not own this one!");
-                        navigate("/user");
+                        navigate("/shipment");
                     }
                 }
             }
@@ -105,7 +105,7 @@ const Shipment = () => {
                     </div>
                     <div className="edit-shipment-form-section">
                         <div className="edit-shipment-td">
-                            Created day: {shipment.shipmentDate}
+                            Modified day: {shipment.shipmentDate}
                         </div>
                     </div>
                     <div className="edit-shipment-form-section">

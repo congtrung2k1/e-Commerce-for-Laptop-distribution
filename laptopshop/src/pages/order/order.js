@@ -6,6 +6,7 @@ import {
     getOrderInformation,
     getProductByOrderDetail,
     getOrderDetail,
+    getAllUserOrder,
     updateOrder,
     submitToSeller,
     removeOrderDetail,
@@ -50,10 +51,15 @@ const Order = () => {
     };
     
     const [orderInfor, setOrderInfor] = useState([]);
+    const [orderList, setOrderList] = useState([]);
     const [orderDetailList, setOrderDetailList] = useState((data) => {
         return data;
     });
     const [productList, setProductList] = useState((data) => {
+        return data;
+    });
+    
+    const [own, setOwn] = useState((data) => {
         return data;
     });
 
@@ -149,12 +155,35 @@ const Order = () => {
     };
 
     useEffect(() => {
-        getUser();
+        getUser();        
+        getAllUserOrder(userId).then((data) => {
+            if (data !== undefined) {
+                setOrderList(data);
+                if (userId !== '1' && userId !== undefined) {
+                    let flag = false;
+                    for (let i in data) {
+                        const item = data[i];
+                        if (item.orderId.toString() === orderId) {
+                            setOwn(true);
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        alert("You do not own this one!");
+                        navigate("/order");
+                    }
+                }
+            }
+        })
+        
         getOrderInfor(orderId);
         getOrderDetailOfOrder(orderId);
+
     }, [orderId]);
 
     const showProduct = () => {
+        if (own !== true) return (<div></div>);
         const arr = [];
         if (productList === undefined) return arr;
         for (let i in orderDetailList) {
@@ -185,6 +214,8 @@ const Order = () => {
     };
 
     const showOrder = () => {
+        if (own !== true) return (<div></div>);
+
         let roNote;
         let roAddr;
         let roStat;

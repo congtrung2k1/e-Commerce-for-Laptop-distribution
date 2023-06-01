@@ -4,7 +4,8 @@ import { useCookies } from './../../hooks/use-cookie/use-cookie';
 import "./product.css"
 
 import { 
-    getProductById
+    getProductById,
+    deleteProduct
 } from '../../resources/product';
 
 import {
@@ -21,6 +22,9 @@ const ProductShow = () => {
 
     const [product, setProduct] = useState([]);
     const [pendingOrder, setPendingOrder] = useState([]);
+    const [root, setRoot] = useState((data) => {
+       return data; 
+    });
     
     const getProduct = async () => {
         getProductById(productId).then((data) => {
@@ -50,8 +54,19 @@ const ProductShow = () => {
             }
         }).catch((error) => console.log(error.message));
     };
+    
+    const updateProduct = async () => {
+        navigate(`/product/update/${productId}`);
+    };
+    
+    const handleRemove = async () => {
+        deleteProduct(productId);
+        alert("Successfully remove");
+        navigate("/product");
+    };
         
     useEffect(() => {
+        if (userId === '1') setRoot(true);
         if (product === undefined || product.length === 0) getProduct();
     }, [product]);
     
@@ -63,31 +78,30 @@ const ProductShow = () => {
                 <div className="edit-shipment-form">
                     <div className="edit-order-form-section">
                         <img className="show-product-image-show" alt={product.name} src={window.location.origin+product.image}/>
-                        <button className="show-product-pay-btn" onClick={() => addPendingOrder(product.productId)}>Add</button>
+                        <button className="show-product-pay-btn" onClick={addPendingOrder}>Add</button>
                         <p className="show-product-info-item"><font face = "Verdana" color="red">{product.price} $</font></p>
-                        <div>
-                            <div className="show-order-item-info">
-                                <p className="show-order-info-item" alt={product.name}>{product.name}</p>
-                            </div>
+                        <div className="show-order-item-info">
+                            <p className=".show-product-info-item" alt={product.name}>{product.name}</p>
                         </div>
                     </div>
-                    
-                    <div className="edit-shipment-form-section">
-                        <div>
-                            Best Sellers Rank: {data[0]}
-                        </div>
+                    <div className="show-product-div">
+                        <b>Best Sellers Rank:</b> {data[0]}
                     </div>
-                    <div className="edit-shipment-form-section">
-                        <div>
-                            Item Dimensions L x W x H: {data[1]}
-                        </div>
+                    <div className="show-product-div">
+                        <b>Item Dimensions L x W x H:</b> {data[1]}
+                    </div>
+                    <div className="show-product-div">
+                        <b>Customer Rating:</b> {data[2]}
                     </div>
                     <div className="edit-shipment-form-section">
                         <div>
-                            Customer Rating: {data[2]}
+                            <button className="show-shipment-pay-btn" onClick={updateProduct} style={{ display: root ? 'block' : 'none' }}>Update Product</button>
+                        </div>
+                        <div>
+                            <button className="show-shipment-pay-btn" onClick={handleRemove} style={{ display: root ? 'block' : 'none' }}>Remove Product</button>
                         </div>
                     </div>
-            </div>
+                </div>
         );
         return arr;
     };

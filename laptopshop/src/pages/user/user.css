@@ -44,12 +44,16 @@
     padding-right: 15px;
 }
 
+textarea{
+    width: 500px;
+}
+
 input.edit-user-name {
-    width: 245px;
+    width: 500px;
 }
 
 input.edit-user-item {
-    width: 415px;
+    width: 500px;
 }
 
 .edit-user-edit-btn {

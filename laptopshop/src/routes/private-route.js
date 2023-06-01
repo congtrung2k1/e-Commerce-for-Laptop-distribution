@@ -16,7 +16,7 @@ const PrivateRoute = ({ children }) => {
         
         return navigate({ path: routes.loginUrl });
     }, [navigate, location, isAuthenticated]);  
-    return isAuthenticated ? children : <Navigate to="/" replace={true}/>;
+    return isAuthenticated ? children : <Navigate to={routes.loginUrl} replace={true}/>;
 };
 
 export { PrivateRoute };

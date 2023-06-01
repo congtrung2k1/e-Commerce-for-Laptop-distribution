@@ -83,6 +83,13 @@
   font-weight: normal;
 }
 
+.show-product-div {
+    font-size: 15px;
+    font-weight: normal;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 .show-product-item-info {
   max-width: 80%;
   overflow: hidden;
@@ -93,7 +100,7 @@
 .show-product-pay-btn {
     display: inline-block;
     margin-right: 10px;
-    background-color: rgb(152, 202, 237);
+    background-color: red;
     color: white;
     border: 2px;
     border-radius: 4px;
@@ -106,7 +113,7 @@
 }
 
 .show-product-pay-btn:hover {
-  background-color: #0074D9;
+  background-color: #cf867e;
 }
 
 .category {

@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import { SessionContext } from "../../hooks/session-context/session-context";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useCookies } from './../../hooks/use-cookie/use-cookie';
+
 import "./nav.css";
 import logo from "../../assets/logo.jpg"
 import { routes } from "../../routes/routes";
 
 const  Nav = () => {
   const { isAuthenticated } = useContext(SessionContext) || {};
+  const { cookies } = useCookies();
 
   return (
     <nav>
@@ -16,11 +19,17 @@ const  Nav = () => {
       </div>
       
       <div className="sections">
-        <Link to="/product">Home</Link>
+        <Link to="/product">Product</Link>
         <Link to="/order">Your Orders</Link>
         <Link to="/shipment">Your Shipments</Link>    
+        {   
+            (isAuthenticated && (cookies.userId === '1')) ?
+                <Link to={"/productadd"}>Import Product</Link>
+            :
+                <div></div>
+        }
       </div>
-      
+            
     {
         isAuthenticated ? 
         <div>

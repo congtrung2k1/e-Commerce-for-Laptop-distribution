@@ -159,6 +159,7 @@ const Order = () => {
         getAllUserOrder(userId).then((data) => {
             if (data !== undefined) {
                 setOrderList(data);
+                if (userId === '1') setOwn(true);
                 if (userId !== '1' && userId !== undefined) {
                     let flag = false;
                     for (let i in data) {
@@ -175,7 +176,7 @@ const Order = () => {
                     }
                 }
             }
-        })
+        });
         
         getOrderInfor(orderId);
         getOrderDetailOfOrder(orderId);
@@ -250,6 +251,10 @@ const Order = () => {
                 <form className="edit-info-form">
                     <table className="edit-info-table">
                         <tbody>
+                            <div className="edit-info-form-section">
+                                <tr><td className="edit-info-td">Customer ID: </td></tr>
+                                <tr><td className="edit-info-td">{userId}</td></tr>
+                            </div>
                             <div className="edit-info-form-section">
                                 <tr><td className="edit-info-td">Note for seller</td></tr>
                                 <tr><td className="edit-info-td"><label for="description"><textarea  name="description" cols="40" rows="5" className="edit-info-item" value={description} readOnly={roNote} onChange={(e) => setDescription(e.target.value)} /></label></td></tr>

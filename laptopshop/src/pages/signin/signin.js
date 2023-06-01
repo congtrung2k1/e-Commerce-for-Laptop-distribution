@@ -17,10 +17,6 @@ function SignIn () {
     
     const handleSignin = async (event) => {
         event.preventDefault();
-        const form = {
-            username: phone,
-            password: password
-        };
         try {
             const data = await postAuthentication(phone, password);
 
@@ -35,6 +31,7 @@ function SignIn () {
         }
         catch(e) {
             console.log(e);
+            alert("Something wrong, Check your account again!");    
         }
     };
 

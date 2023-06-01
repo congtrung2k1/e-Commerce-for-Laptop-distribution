@@ -42,4 +42,22 @@ public class ProductService {
         }
         return res;
     }
+    
+    public void save (Product order) {
+        productRepository.save(order);
+    }
+    
+    public void deleteProduct(Integer product_id) throws Exception {
+        Optional<Product> tmpSeat = productRepository.findById(product_id);
+        if (tmpSeat.isPresent()) {
+            productRepository.deleteById(product_id);
+        } else {
+            throw new Exception("Seat with id: " + product_id + " not found");
+        }
+    }
+    
+    public Product updateProduct(Integer product_id, String name, double price, String description, String image, String create_date, String category) throws Exception{
+        productRepository.updateProduct(product_id, name, price, description, image, create_date, category);
+        return getProductByProductId(product_id);
+    }
 }

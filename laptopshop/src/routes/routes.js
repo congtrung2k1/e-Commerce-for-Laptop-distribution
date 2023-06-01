@@ -1,8 +1,9 @@
 const routes = {
-    loginUrl: '/',
+    loginUrl: '/signin',
     logout: '/logout',
     registerUrl: '/signup',
-    user: '/user'
+    user: '/user',
+    product: '/'
 };
 
 export { routes };

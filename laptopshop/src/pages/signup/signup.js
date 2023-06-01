@@ -17,31 +17,47 @@ function SignUp () {
     const [country, setCountry] = useState(null);
 
     const handleSignup = async (event) => {
-        const form = {
-            name:  name,
-            password:  password,
-            phone:  phone,
-            email:  email,
-            address:  address,
-            country:  country
-        };
         event.preventDefault();
 
-        axios.post('http://localhost:8080/signup', form).then(response => {
-            if (response.data.errorMessage === undefined) {
-                alert("Successfully sign up");
-                navigate("/signin");
-            }
-            else {
-                alert(response.data.errorMessage);
-            }
-        }).catch((error) => console.log(error.message));
+        var filterMail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
+        var filterPhone = /^0([0-9]{9})+$/;
+        
+        if (!filterMail.test(email)) {
+            alert('Invalid Mail format');
+        }
+        else 
+        if (!filterPhone.test(phone)) {
+            alert('Invalid phone format');
+        }
+        else
+        if(name === '' || name === '' || address === '' || country === '') {
+            alert("Something missing");
+        }
+        else {
+            const form = {
+                name:  name,
+                password:  password,
+                phone:  phone,
+                email:  email,
+                address:  address,
+                country:  country
+            };
+            axios.post('http://localhost:8080/signup', form).then(response => {
+                if (response.data.errorMessage === undefined) {
+                    alert("Successfully sign up");
+                    navigate("/signin");
+                }
+                else {
+                    alert(response.data.errorMessage);
+                }
+            }).catch((error) => console.log(error.message));
+        }
     };
 
     return (
-        <div className="sign-up-form-wrapper">
-            <form autoComplete='off' className="sign-up-form" method="post" onSubmit={handleSignup}>
-                <div className="sign-up-form-description">
+        <div className="sign-in-form-wrapper">
+            <form autoComplete='off' className="sign-in-form" method="post" onSubmit={handleSignup}>
+                <div className="sign-in-form-description">
                     <p>Laptop Shop Sign Up</p>
                     <hr></hr>
                 </div>
@@ -95,7 +111,7 @@ function SignUp () {
                             </tr>
                         </div>
                 </table>
-                <button className="sign-up-btn">Submit</button> 
+                <button className="sign-in-btn">Submit</button> 
             </form>
             
             {errorMessage === "" ? "" : 

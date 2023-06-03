@@ -73,7 +73,7 @@ public class ProductController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(create_date);
         
-        String category = product_form.get("category");
+        String category = product_form.get("cate");
         
         Product product = new Product(name, price, description, image, date, category);
         productService.save(product);

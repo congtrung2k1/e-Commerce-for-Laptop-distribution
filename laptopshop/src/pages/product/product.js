@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from './../../hooks/use-cookie/use-cookie';
+import { FaSearch } from "react-icons/fa";
 import "./product.css"
 
 import { 
@@ -22,6 +23,7 @@ const Product = () => {
         
     const [productList, setProductList] = useState([]);
     const [pendingOrder, setPendingOrder] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
 
     const updateProduct = async () => {
         getAllProduct().then((data) => {
@@ -64,6 +66,11 @@ const Product = () => {
         }).catch((error) => console.log(error.message));
     };
     
+    const handleChangeSearchBar = (e, searchString) => {
+        e.preventDefault();
+        setSearchInput(searchString);
+    };
+        
     useEffect(() => {
         updateProduct();
         getUserPendingOrder(userId, "pending").then((data) => {
@@ -93,6 +100,10 @@ const Product = () => {
         const arr = [];
         for (let i in productList) {
             const item = productList[i];
+            
+            if (!(searchInput === "") && !(item.name.toLowerCase().includes(searchInput.toLowerCase())))
+                continue;
+            
             arr.push(                    
                 <div className="show-product-item">
                     <div>
@@ -113,10 +124,16 @@ const Product = () => {
         };
         return arr;
     };
-
+    
     return (
         <div className="background">
             <div className="show-product-wrapper">
+                <div className="search-container"> 
+                    <div className="search-input-wrapper">
+                        <FaSearch id="search-icon" />
+                        <input className="search-input" placeholder="Search here" onChange={(e) => handleChangeSearchBar(e, e.target.value)} value={searchInput} />
+                    </div>
+                </div>
                 <div className="show-product-list">
                     {showProducts()}
                 </div>

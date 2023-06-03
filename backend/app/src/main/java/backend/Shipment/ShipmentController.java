@@ -32,7 +32,6 @@ public class ShipmentController {
     @GetMapping("/edit/{shipmentId}")
     public Shipment getShipment(@PathVariable("shipmentId") String shipmentId) throws Exception {       
         Integer shipment_id = Integer.valueOf(shipmentId);
-        System.out.println(shipmentId);
         return shipmentService.getShipment(shipment_id);
     }
      

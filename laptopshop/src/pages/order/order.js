@@ -196,13 +196,13 @@ const Order = () => {
                             <img className="show-order-item" src={window.location.origin + product.image}/>
                             <p className="show-order-item-title">{product.name}</p>
                             <div className="center-ver">
-                                <button className="show-order-pay-btn" onClick={() => decProduct(item.orderId, item.productId, item)}> - </button>
+                                <button className="show-order-pay-btn" onClick={() => decProduct(item.orderId, item.productId, item)} style={{ display: (root || !pend) ? 'none' : 'block' }}> - </button>
                             </div>
                             <div className="center-ver">
                                 <p className="show-order-item-info">{item.quantity}</p>
                             </div>
                             <div className="center-ver">
-                                <button className="show-order-pay-btn" onClick={() => incProduct(item.orderId, item.productId)}> + </button>
+                                <button className="show-order-pay-btn" onClick={() => incProduct(item.orderId, item.productId)} style={{ display: (root || !pend) ? 'none' : 'block' }}> + </button>
                             </div>
                             <div className="center-ver">
                                 <p color="red">$ {item.price}</p>
@@ -253,7 +253,7 @@ const Order = () => {
                         <tbody>
                             <div className="edit-info-form-section">
                                 <tr><td className="edit-info-td">Customer ID: </td></tr>
-                                <tr><td className="edit-info-td">{userId}</td></tr>
+                                <tr><td className="edit-info-td">{orderInfor.customerId}</td></tr>
                             </div>
                             <div className="edit-info-form-section">
                                 <tr><td className="edit-info-td">Note for seller</td></tr>

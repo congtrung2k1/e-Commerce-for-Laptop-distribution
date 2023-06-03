@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from "react-router-dom";
 import { useCookies } from './../../hooks/use-cookie/use-cookie';
-import ImageUploading from "react-images-uploading";
 import "./product.css";
 
 import {  
@@ -77,9 +76,8 @@ const ProductUpdate = () => {
             form.create_date = create_date;
         }
         if (cate !== "" && cate !== product.cate) {
-            form.cate = cate;
+            form.category = cate;
         }
-        
         alert("Successfully update product");
         updateProduct(productId, form);
     };

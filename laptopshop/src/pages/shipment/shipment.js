@@ -5,7 +5,6 @@ import "./shipment.css"
 import {
     getShipment,
     getAllShipmentUser,
-    getShipmentByOrderId, 
     doneShipment, 
     rejectShipment
 } from "../../resources/shipment";
@@ -17,7 +16,6 @@ const Shipment = () => {
     const { shipmentId } = useParams();
 
     const [shipment, setShipment] = useState([]);
-    const [shipmentList, setShipmentList] = useState([]);
     
     const [root, setRoot] = useState((data) => {
         return data;
@@ -69,7 +67,6 @@ const Shipment = () => {
         getShipmentInfor();
         getAllShipmentUser(userId).then((data) => {
             if (data !== undefined) {
-                setShipmentList(data);
                 if (userId !== '1' && userId !== undefined) {
                     let flag = false;
                     for (let i in data) {

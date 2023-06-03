@@ -21,7 +21,7 @@ const ProductCreate = () => {
     const [image, setImage] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
     const [create_date, setCreateDate] = useState([]);
-    const [cate, setCate] = useState([]);
+    const [category, setCate] = useState([]);
         
     const handleFileChange = (file) => {
       setSelectedFile(file);
@@ -37,7 +37,7 @@ const ProductCreate = () => {
         var filterPrice = /^(?:[1-9]\d*|0)?(?:\.\d+)?$/;
         var filterDate  = /^\d{4}-\d{2}-\d{2}$/;
 
-        if (name === "" || price === "" || description === "" || create_date === "" || cate === "" || selectedFile === undefined)
+        if (name === "" || price === "" || description === "" || create_date === "" || category === "" || selectedFile === undefined)
             alert("Please insert full information!");
         else
         if (!filterPrice.test(price))
@@ -53,7 +53,7 @@ const ProductCreate = () => {
                 description: description,
                 image: `/image/${selectedFile.name}`,
                 create_date: create_date,
-                category: cate
+                category: category
             };
             productCreate(form).then((data) => {
                 if (data !== undefined) {
@@ -103,8 +103,8 @@ const ProductCreate = () => {
                             <tr><td className="edit-user-td"><input type='text' className="edit-user-item" name="create_date" value={create_date} onChange={(e) => setCreateDate(e.target.value)}/></td></tr>
                         </div>
                         <div className="edit-user-form-section">
-                            <tr><td className="edit-user-td"><label for="cate">Provider</label></td></tr>
-                            <tr><td className="edit-user-td"><input type='cate' className="edit-user-item" name="cate" value={cate} onChange={(e) => setCate(e.target.value)}/></td></tr>
+                            <tr><td className="edit-user-td"><label for="category">Provider</label></td></tr>
+                            <tr><td className="edit-user-td"><input type='text' className="edit-user-item" name="category" value={category} onChange={(e) => setCate(e.target.value)}/></td></tr>
                         </div>
                       </tbody>
                     </table>

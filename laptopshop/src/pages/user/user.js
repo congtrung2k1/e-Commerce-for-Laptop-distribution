@@ -43,60 +43,75 @@ export default function User() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const form = {
-            name: user.name,
-            phone: user.phone,
-            password: user.password,
-            email: user.email,
-            address: user.address,
-            country: user.country
-        };
-        if (name !== "" && name !== user.name) {
-            form.name = name;
-        }
-        if (email !== "" && email !== user.email) {
-            form.email = email;
-        }
-        if (address !== "" && address !== user.address) {
-            form.address = address;
-        }
-        if (country !== "" && country !== user.country) {
-            form.country = country;
-        }
         
-        if (password !== "")
-            if (password === user.password) {
-                if (newPassword !== "" && newPasswordConfirm !== "") {
-                    if (newPassword === newPasswordConfirm) {
-                        console.log(password);
-                        console.log(newPassword);
-                        form.password = newPassword;
+        var filterMail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
+        var filterPhone = /^0([0-9]{9})+$/;
+        
+        if (!filterMail.test(email)) {
+            alert('Invalid Mail format');
+        }
+        else 
+        if (!filterPhone.test(phone)) {
+            alert('Invalid phone format');
+        }
+        else
+        if(name === '' || name === '' || address === '' || country === '') {
+            alert("Something missing");
+        }
+        else {
+            const form = {
+                name: user.name,
+                phone: user.phone,
+                password: user.password,
+                email: user.email,
+                address: user.address,
+                country: user.country
+            };
+            if (name !== user.name) {
+                form.name = name;
+            }
+            if (email !== user.email) {
+                form.email = email;
+            }
+            if (address !== user.address) {
+                form.address = address;
+            }
+            if (country !== user.country) {
+                form.country = country;
+            }
+
+            if (password !== "")
+                if (password === user.password) {
+                    if (newPassword !== "" && newPasswordConfirm !== "") {
+                        if (newPassword === newPasswordConfirm) {
+                            form.password = newPassword;
+                        }
+                        else{
+                            alert('Failed! re-password is wrong');
+                            return;
+                        }
                     }
-                    else{
-                        alert('Failed! re-password is wrong');
+                    else {
+                        alert('Failed! Please enter the new password!');
                         return;
                     }
                 }
                 else {
-                    alert('Failed! Please enter the new password!');
+                    alert('Failed! Wrong password!');
                     return;
                 }
-            }
-            else {
-                alert('Failed! Wrong password!');
-                return;
-            }
-        
-        updateUser(userId, form).then((response) => {
-            if (response.data.errorMessage === undefined) {
-                alert("Successfully change profile");
-                navigate(0);
-                navigate("/user");
-            }
-            else {
-                alert(response.data.errorMessage);
-            }
-        }).catch((error) => console.log(error.message));
+
+            updateUser(userId, form).then((response) => {
+                if (response.data.errorMessage === undefined) {
+                    alert("Successfully change profile");
+                    navigate(0);
+                    navigate("/user");
+                }
+                else {
+                    alert(response.data.errorMessage);
+                }
+            }).catch((error) => console.log(error.message));
+        }
     }
 
     return (

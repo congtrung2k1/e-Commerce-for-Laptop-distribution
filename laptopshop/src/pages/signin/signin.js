@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from './../../hooks/use-cookie/use-cookie';
 
@@ -25,7 +24,7 @@ function SignIn () {
                 setCookie("jwt", data.token);
                 setCookie("userId", data.userId);
                 setCookie("phone", data.phone);
-                navigate("/user", { isAuthenticated: true });
+                navigate("/product", { isAuthenticated: true });
                 navigate(0);
             }
         }

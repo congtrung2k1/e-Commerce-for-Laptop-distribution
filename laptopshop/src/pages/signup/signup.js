@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "../../hooks/use-cookie/use-cookie";
 
 import "./signup.css";
 

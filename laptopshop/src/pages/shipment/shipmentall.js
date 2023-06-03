@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from './../../hooks/use-cookie/use-cookie';
 import "./shipment.css"
 import {
-    getShipment,
     getAll,
     getAllShipmentUser,
 } from "../../resources/shipment";
@@ -12,9 +11,7 @@ const Shipment = () => {
     const navigate = useNavigate();    
     const { cookies } = useCookies();
     const userId = cookies.userId;
-    const { shipmentId } = useParams();
 
-    const [shipment, setShipment] = useState([]);
     const [shipmentList, setShipmentList] = useState([]);
     
     const [root, setRoot] = useState((data) => {
@@ -69,7 +66,9 @@ const Shipment = () => {
                 arr.push(
                     <div className="edit-shipment-form-section">
                         <div className="edit-shipment-td">
-                            <a href={`/shipment/${item.shipmentId}`}>Order Number {item.orderId}</a>
+                            <a href={`/order/${item.orderId}`}>Order Number {item.orderId}</a>
+                            <span>   ________  </span>
+                            <a href={`/shipment/${item.shipmentId}`}>Shipment Number {item.shipmentId}</a>
                         </div>
                     </div> 
                 );
